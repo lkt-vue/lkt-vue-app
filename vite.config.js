@@ -31,6 +31,7 @@ export default {
                 'lkt-loader',
                 'lkt-modal',
                 'lkt-modal-confirm',
+                'lkt-paginator',
                 'lkt-table',
                 'lkt-tag',
                 'lkt-tooltip',

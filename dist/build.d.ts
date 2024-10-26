@@ -1,3 +1,3 @@
-declare function Ir(e: any): void;
-declare function Dr(e: any): import("vue").App<Element>;
-export { Ir as addAppRoute, Dr as createLktApp };
+declare function Lr(e: any): void;
+declare function jr(e: any): import("vue").App<Element>;
+export { Lr as addAppRoute, jr as createLktApp };
