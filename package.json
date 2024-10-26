@@ -1,6 +1,6 @@
 {
   "name": "lkt-vue-app",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "keywords": [
     "lkt",
@@ -23,7 +23,7 @@
     "./theme": "./theme/default.css",
     "./theme/default": "./theme/default.css"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/build.d.ts",
   "files": [
     "dist/*",
     "src/**/*.vue",

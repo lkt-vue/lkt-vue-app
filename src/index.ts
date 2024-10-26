@@ -9,7 +9,7 @@ import LktLoader from 'lkt-loader';
 import LktModal from "lkt-modal";
 import LktModalConfirm from "lkt-modal-confirm";
 import LktItemCrud from "lkt-item-crud";
-import {createRouter, RouteRecordRaw} from "vue-router";
+import {createRouter, NavigationGuardWithThis, RouteRecordRaw} from "vue-router";
 import {Settings} from "./settings/Settings";
 import LktTag from "lkt-tag";
 //@ts-ignore
@@ -39,6 +39,7 @@ export const createLktApp = (component: Component) => {
   if (typeof Settings.beforeEachRouteCallback === 'function') {
     router.beforeEach(Settings.beforeEachRouteCallback);
   }
+  app.use(router);
 
   // Load all vuex storages
   app.use(getVuexStore());
@@ -48,4 +49,8 @@ export const createLktApp = (component: Component) => {
 
 export const addAppRoute = (route: RouteRecordRaw) => {
   Settings.routerRoutes.push(route);
+}
+
+export const setBeforeEachRouteCallback = (fn: NavigationGuardWithThis<any>) => {
+  Settings.beforeEachRouteCallback = fn;
 }
