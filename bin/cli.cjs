@@ -7,8 +7,6 @@ const root = process.cwd(); // proyecto consumidor
 const myPkg = require(path.join(__dirname, '..', 'package.json'));
 const peers = myPkg.peerDependencies || {};
 
-console.log('install root path: ', __dirname, myPkg)
-
 const args = process.argv.slice(2);
 const force = args.includes('--force') || args.includes('-f');
 const dev = args.includes('--dev') || args.includes('-D');
