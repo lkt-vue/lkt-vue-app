@@ -34,6 +34,8 @@ function run(cmd, args) {
     return r.status === 0;
 }
 
+let installDeps = [];
+
 function installOne(dep, version) {
     if (!force && isInstalled(dep)) {
         console.log(`✔ ${dep} ya está instalado — saltando.`);
@@ -60,6 +62,32 @@ function installOne(dep, version) {
     return run(cmd, cmdArgs);
 }
 
+function installAll(haystack) {
+    if (!force && isInstalled(dep)) {
+        console.log(`✔ ${dep} ya está instalado — saltando.`);
+        return true;
+    }
+
+    let cmd, cmdArgs;
+    if (pm === 'pnpm') {
+        cmd = 'pnpm';
+        cmdArgs = ['add', `${haystack}`];
+        if (dev) cmdArgs.push('-D');
+    } else if (pm === 'yarn') {
+        cmd = 'yarn';
+        cmdArgs = ['add', `${haystack}`];
+        if (dev) cmdArgs.push('--dev');
+    } else {
+        cmd = 'npm';
+        cmdArgs = ['install', `${haystack}`];
+        if (dev) cmdArgs.push('--save-dev');
+        else cmdArgs.push('--no-save')
+    }
+
+    console.log(`📦 Instalando dependencias faltantes con: ${cmd} ${haystack}`);
+    return run(cmd, cmdArgs);
+}
+
 const items = Object.entries(peers);
 if (items.length === 0) {
     console.log('No hay peerDependencies en este paquete.');
@@ -68,11 +96,17 @@ if (items.length === 0) {
 
 const failed = [];
 for (const [dep, ver] of items) {
-    if (!installOne(dep, ver)) failed.push(dep);
+    if (!force && isInstalled(dep)) {
+        console.log(`✔ ${dep} ya está instalado — saltando.`);
+        continue;
+    }
+
+    installDeps.push([dep, ver]);
 }
 
-if (failed.length) {
-    console.error('❌ Fallaron las instalaciones de:', failed.join(', '));
-    process.exit(1);
+if (installDeps.length > 0) {
+    let mappedDeps = installDeps.map(dep => `${dep[0]}@${dep[1]}`).join(' ');
+    installAll(mappedDeps);
 }
+
 console.log('✅ peerDependencies instaladas correctamente.');

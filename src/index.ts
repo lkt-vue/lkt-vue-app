@@ -31,8 +31,9 @@ import LktWebPage from "lkt-web-page";
 import LktCounter from "lkt-counter";
 import LktDot from "lkt-dot";
 import LktBanner from "lkt-banner-box";
+import {LktObject} from "lkt-vue-kernel";
 
-export const createLktApp = (component: Component) => {
+export const createLktApp = (component: Component, componentProps: LktObject) => {
     const app: App = createApp(component);
 
     // Configure router

@@ -1,4 +1,4 @@
-declare function Lr(e: any): void;
-declare function jr(e: any): import("vue").App<Element>;
-declare function Mr(e: any): void;
-export { Lr as addAppRoute, jr as createLktApp, Mr as setBeforeEachRouteCallback };
+declare function rne(e: any): void;
+declare function tne(e: any, t: any): import("vue").App<Element>;
+declare function ane(e: any): void;
+export { rne as addAppRoute, tne as createLktApp, ane as setBeforeEachRouteCallback };
