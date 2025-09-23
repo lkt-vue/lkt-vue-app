@@ -1,8 +1,9 @@
-declare namespace xte {
-    function install(e: any, t: any): void;
+declare namespace so {
+    function install(o: any, w: any): void;
 }
-declare function Tte(): import("vue").Ref<boolean, boolean>;
-declare function wte(): import("vue").Ref<any, any>;
-declare function Cte(e: any): void;
-declare function bte(e: any): void;
-export { xte as default, Tte as getLktAdminEnabled, wte as getLktAppSize, Cte as setLktAdminEnabled, bte as setLktAppSize };
+declare function vo(): import("vue").Ref<boolean, boolean>;
+declare function uo(): import("vue").Ref<H, H>;
+declare function Lo(o: any): void;
+declare function co(o: any): void;
+import { AppSize as H } from "lkt-vue-kernel";
+export { so as default, vo as getLktAdminEnabled, uo as getLktAppSize, Lo as setLktAdminEnabled, co as setLktAppSize };
