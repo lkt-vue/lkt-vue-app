@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {inject, Ref} from "vue";
 import {StateControl} from "../../state/StateControl";
+import {MenuController} from "lkt-vue-kernel";
 
 const props = withDefaults(defineProps<{
     loading?: boolean,
@@ -8,9 +9,7 @@ const props = withDefaults(defineProps<{
     loading: false,
 });
 
-const menuOpened = <Ref<boolean>>inject('menuOpened');
-
-const closeMenu = () => menuOpened.value = false;
+const closeMenu = () => MenuController.closeMenu('_');
 </script>
 
 <template>
@@ -18,9 +17,9 @@ const closeMenu = () => menuOpened.value = false;
         <lkt-menu
             v-if="!loading"
             v-bind="StateControl.lktMainMenu"
-            class="lkt-main-menu"
-            :class="menuOpened ? 'menu-opened' : ''"
-            @click-outside="menuOpened = false"
+            class="main-menu"
+            menu-key="lkt-main-menu"
+            @click-outside="closeMenu"
         />
         <lkt-loader v-else/>
     </div>

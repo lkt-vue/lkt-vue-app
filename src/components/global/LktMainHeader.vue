@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {inject, Ref} from "vue";
+import {inject, nextTick, ref} from "vue";
+import {MenuController} from "lkt-vue-kernel";
 
 const props = withDefaults(defineProps<{
     loading?: boolean,
@@ -9,9 +10,12 @@ const props = withDefaults(defineProps<{
     lang: '',
 });
 
-const menuOpened = <Ref<boolean>>inject('menuOpened');
+const menuOpened = ref(false);
 const onClickMenuButton = () => {
-    menuOpened.value = !menuOpened.value;
+    MenuController.toggleMenu('lkt-main-menu');
+    nextTick(() => {
+        menuOpened.value = MenuController.getMenuStatus('lkt-main-menu');
+    })
 }
 </script>
 

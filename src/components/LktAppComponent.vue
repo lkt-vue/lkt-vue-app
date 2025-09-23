@@ -8,6 +8,7 @@ import LktMainHeader from "./global/LktMainHeader.vue";
 import LktMainMenu from "./global/LktMainMenu.vue";
 import {StateControl} from "./../state/StateControl";
 import {getLktAppLoading, getLktAppReady, setLktAppLoading, setLktAppReady} from "./../functions/state-control-functions";
+import {MenuController} from "lkt-vue-kernel";
 
 const ready = getLktAppReady(),
     loading = getLktAppLoading(),
@@ -15,9 +16,7 @@ const ready = getLktAppReady(),
     toastCanvas = ref(null),
     route = useRoute();
 
-const currentLang = ref('en'),
-    menuOpened = <Ref>inject('menuOpened')
-;
+const currentLang = ref('en');
 
 const loadApp = async () => {
         // @todo (config in order to auto fetch i18n, initial config, etc.)
@@ -31,7 +30,7 @@ const loadApp = async () => {
 const computedContentClass = computed(() => {
     let r = [];
 
-    if (menuOpened.value) r.push('menu-opened');
+    if (MenuController.getMenuStatus('lkt-main-menu')) r.push('menu-opened');
     if (computedCanRenderBottomBar.value) r.push('has-bottom-bar');
     r.push(`route-is-${route.name}`)
 
