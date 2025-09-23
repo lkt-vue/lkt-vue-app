@@ -1,4 +1,4 @@
-import {App, Plugin} from 'vue';
+import {App, Plugin, Ref} from 'vue';
 
 import LktTooltip from "lkt-tooltip";
 import LktField from "lkt-field";
@@ -28,9 +28,50 @@ import LktWebPage from "lkt-web-page";
 import LktCounter from "lkt-counter";
 import LktDot from "lkt-dot";
 import LktBanner from "lkt-banner-box";
+import {AppSize} from "lkt-vue-kernel";
+import {StateControl} from "./state/StateControl";
+
+
+// Style: Browsers normalization
+import 'modern-normalize/modern-normalize.css';
+
+// Style: Default layout engines
+import 'lkt-flex-layout/layout/default.css';
+import 'lkt-grid-layout/layout/default.css';
+import 'lkt-grid-layout/modifiers/default.css';
+
+// Style: LKT
+import 'lkt-accordion/styles';
+import 'lkt-anchor/styles';
+import 'lkt-banner-box/styles';
+import 'lkt-box/styles';
+import 'lkt-button/styles';
+import 'lkt-charts/styles';
+import 'lkt-dot/styles';
+import 'lkt-field/styles';
+import 'lkt-header/styles';
+import 'lkt-http-info/styles';
+import 'lkt-icon/styles';
+import 'lkt-image/styles';
+import 'lkt-item-crud/styles';
+import 'lkt-loader/styles';
+import 'lkt-menu/styles';
+import 'lkt-modal/styles';
+import 'lkt-paginator/styles';
+import 'lkt-progress/styles';
+import 'lkt-step-process/styles';
+import 'lkt-table/styles';
+import 'lkt-tag/styles';
+import 'lkt-toast/styles';
+import 'lkt-tooltip/styles';
+import 'lkt-vue-admin/styles';
 
 const LktVueApp: Plugin = {
     install: (app: App, options: any) => {
+
+        // App-level provide global vars
+        app.provide('lktAppSize', StateControl.lktAppSize);
+        app.provide('lktAdminEnabled', StateControl.lktAdminEnabled);
 
         // Load all vuex storages
         app.use(getVuexStore());
@@ -67,3 +108,19 @@ const LktVueApp: Plugin = {
 };
 
 export default LktVueApp;
+
+export const setLktAppSize = (size: AppSize) => {
+    StateControl.lktAppSize.value = size;
+}
+
+export const getLktAppSize = (): Ref<AppSize> => {
+    return StateControl.lktAppSize;
+}
+
+export const setLktAdminEnabled = (state: boolean) => {
+    StateControl.lktAdminEnabled.value = state;
+}
+
+export const getLktAdminEnabled = (): Ref<boolean> => {
+    return StateControl.lktAdminEnabled;
+}

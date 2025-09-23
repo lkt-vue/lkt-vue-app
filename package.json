@@ -19,7 +19,7 @@
     ".": {
       "import": "./dist/build.js"
     },
-    "./styles": "./dist/style.css",
+    "./styles": "./dist/build.css",
     "./theme": "./theme/default.css",
     "./theme/default": "./theme/default.css"
   },
@@ -95,6 +95,7 @@
     "lkt-vue-kernel": "^1.1.0",
     "lkt-vuex-tools": "^1.1.0",
     "lkt-web-page": "github:lkt-vue/lkt-web-page.git",
+    "modern-normalize": "^2.0.0",
     "vue": "^3.5.11",
     "vue-router": "^4.4.5",
     "vue3-carousel": "^0.14.0",
