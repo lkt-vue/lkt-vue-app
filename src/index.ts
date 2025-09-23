@@ -30,6 +30,8 @@ import LktDot from "lkt-dot";
 import LktBanner from "lkt-banner-box";
 import {AppSize} from "lkt-vue-kernel";
 import {StateControl} from "./state/StateControl";
+import LktAppComponent from "./components/LktAppComponent.vue";
+import {LktAppConfig} from "./config/LktAppConfig";
 
 
 // Style: Browsers normalization
@@ -67,11 +69,17 @@ import 'lkt-tooltip/styles';
 import 'lkt-vue-admin/styles';
 
 const LktVueApp: Plugin = {
-    install: (app: App, options: any) => {
+    install: (app: App, cfg: LktAppConfig) => {
+
+        // Setup config
+        if (cfg.mainMenu) StateControl.lktMainMenu = cfg.mainMenu;
+        if (cfg.bottomBar) StateControl.lktBottomBar = cfg.bottomBar;
 
         // App-level provide global vars
         app.provide('lktAppSize', StateControl.lktAppSize);
         app.provide('lktAdminEnabled', StateControl.lktAdminEnabled);
+        app.provide('lktAppLoading', StateControl.lktAppLoading);
+        app.provide('lktAppReady', StateControl.lktAppReady);
 
         // Load all vuex storages
         app.use(getVuexStore());
@@ -124,3 +132,7 @@ export const setLktAdminEnabled = (state: boolean) => {
 export const getLktAdminEnabled = (): Ref<boolean> => {
     return StateControl.lktAdminEnabled;
 }
+
+export {
+    LktAppComponent,
+};

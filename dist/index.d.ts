@@ -1,5 +1,6 @@
 import { Plugin, Ref } from 'vue';
 import { AppSize } from "lkt-vue-kernel";
+import LktAppComponent from "./components/LktAppComponent.vue";
 import 'modern-normalize/modern-normalize.css';
 import 'lkt-flex-layout/layout/default.css';
 import 'lkt-grid-layout/layout/default.css';
@@ -34,3 +35,4 @@ export declare const setLktAppSize: (size: AppSize) => void;
 export declare const getLktAppSize: () => Ref<AppSize>;
 export declare const setLktAdminEnabled: (state: boolean) => void;
 export declare const getLktAdminEnabled: () => Ref<boolean>;
+export { LktAppComponent, };
