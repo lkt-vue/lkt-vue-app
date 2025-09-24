@@ -1,13 +1,18 @@
 <script lang="ts" setup>
 import {setCanvas} from "lkt-modal";
-import {computed, inject, nextTick, onMounted, Ref, ref, watch} from "vue";
+import {computed, nextTick, onMounted, ref, watch} from "vue";
 import {setToastCanvas} from "lkt-toast";
 import {useRoute} from "vue-router";
 import LktBottomBar from "./global/LktBottomBar.vue";
 import LktMainHeader from "./global/LktMainHeader.vue";
 import LktMainMenu from "./global/LktMainMenu.vue";
 import {StateControl} from "./../state/StateControl";
-import {getLktAppLoading, getLktAppReady, setLktAppLoading, setLktAppReady} from "./../functions/state-control-functions";
+import {
+    getLktAppLoading,
+    getLktAppReady,
+    setLktAppLoading,
+    setLktAppReady
+} from "./../functions/state-control-functions";
 import {MenuController} from "lkt-vue-kernel";
 
 const ready = getLktAppReady(),

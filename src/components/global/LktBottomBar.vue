@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {StateControl} from "@/state/StateControl";
+import {StateControl} from "./../../state/StateControl";
 
 const props = withDefaults(defineProps<{
     lang?: string,
@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<{
         <lkt-menu
             v-if="!loading"
             v-bind="StateControl.lktBottomBar"
+            menu-key="lkt-bottom-bar"
             class="bottom-bar"
         />
         <lkt-loader v-else/>

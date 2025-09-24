@@ -1,12 +1,12 @@
-declare const no: import("vue").DefineComponent<{}, (n: any, bt: any) => import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+declare const ro: import("vue").DefineComponent<{}, (e: any, zt: any) => import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
     [key: string]: any;
 }>, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
-declare namespace io {
-    function install(t: any, e: any): void;
+declare namespace mo {
+    function install(t: any, i: any): void;
 }
-declare function so(): import("vue").Ref<boolean, boolean>;
-declare function mo(): import("vue").Ref<ft, ft>;
-declare function ro(t: any): void;
-declare function lo(t: any): void;
-import { AppSize as ft } from "lkt-vue-kernel";
-export { no as LktAppComponent, io as default, so as getLktAdminEnabled, mo as getLktAppSize, ro as setLktAdminEnabled, lo as setLktAppSize };
+declare function ko(): import("vue").Ref<boolean, boolean>;
+declare function ao(): import("vue").Ref<_t, _t>;
+declare function uo(t: any): void;
+declare function so(t: any): void;
+import { AppSize as _t } from "lkt-vue-kernel";
+export { ro as LktAppComponent, mo as default, ko as getLktAdminEnabled, ao as getLktAppSize, uo as setLktAdminEnabled, so as setLktAppSize };

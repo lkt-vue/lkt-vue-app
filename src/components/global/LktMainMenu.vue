@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {inject, Ref} from "vue";
 import {StateControl} from "../../state/StateControl";
 import {MenuController} from "lkt-vue-kernel";
 
@@ -17,7 +16,6 @@ const closeMenu = () => MenuController.closeMenu('_');
         <lkt-menu
             v-if="!loading"
             v-bind="StateControl.lktMainMenu"
-            class="main-menu"
             menu-key="lkt-main-menu"
             @click-outside="closeMenu"
         />
