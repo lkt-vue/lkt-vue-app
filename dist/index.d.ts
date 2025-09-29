@@ -25,6 +25,7 @@ import 'lkt-paginator/styles';
 import 'lkt-progress/styles';
 import 'lkt-step-process/styles';
 import 'lkt-table/styles';
+import 'lkt-tabs/styles';
 import 'lkt-tag/styles';
 import 'lkt-toast/styles';
 import 'lkt-tooltip/styles';
