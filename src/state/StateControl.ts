@@ -10,4 +10,8 @@ export class StateControl {
 
     static lktMainMenu?: Menu = undefined;
     static lktBottomBar?: Menu = undefined;
+
+    static hasMainHeader?: boolean | (() => boolean) = true;
+    static hasMainMenu?: boolean | (() => boolean) = true;
+    static hasBottomBar?: boolean | (() => boolean) = true;
 }

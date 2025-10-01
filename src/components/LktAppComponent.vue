@@ -22,6 +22,7 @@ const ready = getLktAppReady(),
     route = useRoute();
 
 const currentLang = ref('en');
+const hasMainHeader = ref(false);
 
 const loadApp = async () => {
         // @todo (config in order to auto fetch i18n, initial config, etc.)
@@ -37,6 +38,7 @@ const computedContentClass = computed(() => {
 
     if (MenuController.getMenuStatus('lkt-main-menu')) r.push('menu-opened');
     if (computedCanRenderBottomBar.value) r.push('has-bottom-bar');
+    if (hasMainHeader.value) r.push('has-main-header');
     r.push(`route-is-${route.name}`)
 
     return r.join(' ');
@@ -55,12 +57,29 @@ onMounted(async () => {
 });
 
 const computedCanRenderBottomBar = computed(() => {
-    return StateControl.lktBottomBar && StateControl.lktBottomBar.modelValue?.length > 0;
+    return StateControl.lktBottomBar
+        && StateControl.lktBottomBar.modelValue?.length > 0
+        && (StateControl.hasBottomBar === true || (typeof StateControl.hasBottomBar === 'function' && StateControl.hasBottomBar({
+            route,
+        })))
+        ;
 })
 
+
+
 const computedCanRenderMainMenu = computed(() => {
-    return StateControl.lktMainMenu && StateControl.lktMainMenu.modelValue?.length > 0;
+    return StateControl.lktMainMenu
+        && StateControl.lktMainMenu.modelValue?.length > 0
+        && (StateControl.hasMainMenu === true || (typeof StateControl.hasMainMenu === 'function' && StateControl.hasMainMenu({
+            route
+        })))
+        ;
 })
+
+watch(route, () => {
+    computedCanRenderMainMenu.value;
+    computedCanRenderBottomBar.value;
+}, {flush: 'pre', immediate: true, deep: true});
 </script>
 
 <template>
@@ -70,6 +89,7 @@ const computedCanRenderMainMenu = computed(() => {
             v-slot="{ Component }"
         >
             <lkt-main-header
+                v-model:hasMainHeader="hasMainHeader"
                 :lang="currentLang"
                 :loading="loading"
             />

@@ -7,4 +7,7 @@ export declare class StateControl {
     static lktAppReady: Ref<boolean>;
     static lktMainMenu?: Menu;
     static lktBottomBar?: Menu;
+    static hasMainHeader?: boolean | (() => boolean);
+    static hasMainMenu?: boolean | (() => boolean);
+    static hasBottomBar?: boolean | (() => boolean);
 }

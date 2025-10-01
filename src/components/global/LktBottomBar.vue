@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import {StateControl} from "./../../state/StateControl";
+import {useRoute} from "vue-router";
+import {ref, watch} from "vue";
 
 const props = withDefaults(defineProps<{
     lang?: string,
@@ -8,6 +10,21 @@ const props = withDefaults(defineProps<{
     lang: '',
     loading: false,
 });
+
+const route = useRoute();
+const canRender = ref(false);
+
+const checkVisibility = () => {
+    return StateControl.lktBottomBar
+        && StateControl.lktBottomBar.modelValue?.length > 0
+        && (StateControl.hasBottomBar === true || (typeof StateControl.hasBottomBar === 'function' && StateControl.hasBottomBar({
+            route,
+        })));
+}
+
+watch(route, () => {
+    canRender.value = checkVisibility();
+}, {flush: 'pre', immediate: true, deep: true});
 </script>
 
 <template>

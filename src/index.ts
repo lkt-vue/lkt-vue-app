@@ -76,6 +76,9 @@ const LktVueApp: Plugin = {
         // Setup config
         if (cfg.mainMenu) StateControl.lktMainMenu = cfg.mainMenu;
         if (cfg.bottomBar) StateControl.lktBottomBar = cfg.bottomBar;
+        if (cfg.hasMainHeader) StateControl.hasMainHeader = cfg.hasMainHeader;
+        if (cfg.hasMainMenu) StateControl.hasMainMenu = cfg.hasMainMenu;
+        if (cfg.hasBottomBar) StateControl.hasBottomBar = cfg.hasBottomBar;
 
         // App-level provide global vars
         app.provide('lktAppSize', StateControl.lktAppSize);

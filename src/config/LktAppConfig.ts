@@ -6,4 +6,8 @@ export interface LktAppConfig {
 
     mainMenu?: Menu,
     bottomBar?: Menu
+
+    hasMainMenu?: boolean | (() => boolean)
+    hasBottomBar?: boolean | (() => boolean)
+    hasMainHeader?: boolean | (() => boolean)
 }
