@@ -11,6 +11,7 @@ import LktItemCrud from "lkt-item-crud";
 import LktTag from "lkt-tag";
 import {getVuexStore} from "lkt-vuex-tools";
 import LktPaginator from "lkt-paginator";
+import LktPolymorphicElement from "lkt-polymorphic-element";
 import LktCharts from "lkt-charts";
 import LktIcon from "lkt-icon";
 import LktBox from "lkt-box";
@@ -109,6 +110,7 @@ const LktVueApp: Plugin = {
         if (app.component('lkt-menu') === undefined) app.use(LktMenu);
         if (app.component('lkt-modal') === undefined) app.use(LktModal);
         if (app.component('lkt-paginator') === undefined) app.use(LktPaginator);
+        if (app.component('lkt-polymorphic-element') === undefined) app.use(LktPolymorphicElement);
         if (app.component('lkt-progress') === undefined) app.use(LktProgress);
         if (app.component('lkt-step-process') === undefined) app.use(LktStepProcess);
         if (app.component('lkt-table') === undefined) app.use(LktTable);

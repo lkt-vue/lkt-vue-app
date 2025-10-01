@@ -83,6 +83,7 @@
     "lkt-modal": "^2.0.10",
     "lkt-object-tools": "^1.0.3",
     "lkt-paginator": "^2.0.4",
+    "lkt-polymorphic-element": "github:lkt-vue/lkt-polymorphic-element.git",
     "lkt-progress": "^2.0.0",
     "lkt-step-process": "^2.0.8",
     "lkt-string-tools": "^1.1.0",

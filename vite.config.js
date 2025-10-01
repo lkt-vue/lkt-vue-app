@@ -45,6 +45,7 @@ export default {
                 'lkt-header',
                 'lkt-modal',
                 'lkt-paginator',
+                'lkt-polymorphic-element',
                 'lkt-progress',
                 'lkt-table',
                 'lkt-tabs',
