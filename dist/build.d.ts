@@ -1,4 +1,4 @@
-declare const ve: import("vue").DefineComponent<{}, (n: any, B: any) => import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+declare const ve: import("vue").DefineComponent<{}, (n: any, L: any) => import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
     [key: string]: any;
 }>, {}, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").PublicProps, Readonly<{}> & Readonly<{}>, {}, {}, {}, {}, string, import("vue").ComponentProvideOptions, true, {}, any>;
 declare namespace he {

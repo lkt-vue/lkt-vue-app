@@ -82,10 +82,10 @@ const Ht = /* @__PURE__ */ y({
     return v(s, () => {
       l.value = p(), f.value = l.value;
     }, { flush: "pre", immediate: !0, deep: !0 }), (h, _) => {
-      const L = d("lkt-button");
+      const M = d("lkt-button");
       return l.value ? (a(), g("div", Rt, [
         b("div", Ct, [
-          A(L, ht(Mt({
+          A(M, ht(Mt({
             type: k(gt).Menu,
             menuKey: "lkt-main-menu"
           })), {
@@ -125,21 +125,21 @@ const Ht = /* @__PURE__ */ y({
   __name: "LktAppComponent",
   setup(t) {
     const o = Et(), u = Pt(), c = r(null), s = r(null), l = C(), f = r("en"), p = r(!1), h = async () => {
-      var n, B;
+      var n, L;
       if ((n = e.setup) != null && n.i18nResource) {
-        const M = await x(e.setup.i18nResource);
-        bt(M.data);
+        const B = await x(e.setup.i18nResource);
+        bt(B.data);
       }
-      if ((B = e.setup) != null && B.setupResource) {
-        const M = await x(e.setup.setupResource);
-        e.lktAppSetup.value = M.data, console.log("hasSetup resource: ", M.data);
+      if ((L = e.setup) != null && L.setupResource) {
+        const B = await x(e.setup.setupResource);
+        e.lktAppSetup.value = B.data;
       }
       At(() => {
         zt(!0), wt(!1);
       });
     }, _ = H(() => {
       let n = [];
-      return w.getMenuStatus("lkt-main-menu") && n.push("menu-opened"), L.value && n.push("has-bottom-bar"), p.value && n.push("has-main-header"), n.push(`route-is-${l.name}`), n.join(" ");
+      return w.getMenuStatus("lkt-main-menu") && n.push("menu-opened"), M.value && n.push("has-bottom-bar"), p.value && n.push("has-main-header"), n.push(`route-is-${l.name}`), n.join(" ");
     });
     v(c, (n) => {
       W(c.value);
@@ -148,7 +148,7 @@ const Ht = /* @__PURE__ */ y({
     }), Lt(async () => {
       await h();
     });
-    const L = H(() => {
+    const M = H(() => {
       var n;
       return e.lktBottomBar && ((n = e.lktBottomBar.modelValue) == null ? void 0 : n.length) > 0 && (e.hasBottomBar === !0 || typeof e.hasBottomBar == "function" && e.hasBottomBar({
         route: l
@@ -160,17 +160,17 @@ const Ht = /* @__PURE__ */ y({
       }));
     });
     return v(l, () => {
-      V.value, L.value;
-    }, { flush: "pre", immediate: !0, deep: !0 }), (n, B) => {
-      const M = d("lkt-modal-canvas"), P = d("lkt-toast-canvas"), T = d("router-view"), S = d("lkt-loader");
+      V.value, M.value;
+    }, { flush: "pre", immediate: !0, deep: !0 }), (n, L) => {
+      const B = d("lkt-modal-canvas"), P = d("lkt-toast-canvas"), T = d("router-view"), I = d("lkt-loader");
       return a(), g("div", {
         class: Bt(["main-content", _.value])
       }, [
         k(o) && !k(u) ? (a(), m(T, { key: 0 }, {
-          default: E(({ Component: I }) => [
+          default: E(({ Component: S }) => [
             A(Vt, {
               hasMainHeader: p.value,
-              "onUpdate:hasMainHeader": B[0] || (B[0] = ($) => p.value = $),
+              "onUpdate:hasMainHeader": L[0] || (L[0] = ($) => p.value = $),
               lang: f.value,
               loading: k(u)
             }, null, 8, ["hasMainHeader", "lang", "loading"]),
@@ -178,12 +178,12 @@ const Ht = /* @__PURE__ */ y({
               key: 0,
               loading: k(u)
             }, null, 8, ["loading"])) : R("", !0),
-            (a(), m(_t(I))),
-            L.value ? (a(), m(Ht, {
+            (a(), m(_t(S))),
+            M.value ? (a(), m(Ht, {
               key: 1,
               loading: k(u)
             }, null, 8, ["loading"])) : R("", !0),
-            A(M, {
+            A(B, {
               ref_key: "modalCanvas",
               ref: c
             }, null, 512),
@@ -193,7 +193,7 @@ const Ht = /* @__PURE__ */ y({
             }, null, 512)
           ]),
           _: 1
-        })) : (a(), m(S, { key: 1 }))
+        })) : (a(), m(I, { key: 1 }))
       ], 2);
     };
   }

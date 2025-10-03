@@ -35,7 +35,6 @@ const loadApp = async () => {
     if (StateControl.setup?.setupResource) {
         const setupResponse = await httpCall(StateControl.setup.setupResource);
         StateControl.lktAppSetup.value = setupResponse.data;
-        console.log('hasSetup resource: ', setupResponse.data)
     }
 
     nextTick(() => {
