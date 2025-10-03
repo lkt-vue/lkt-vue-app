@@ -1,5 +1,6 @@
 import {ref, Ref} from "vue";
-import {AppSize, Menu} from "lkt-vue-kernel";
+import {AppSize, LktObject, Menu} from "lkt-vue-kernel";
+import {AppSetupConfig} from "../config/partials/AppSetupConfig";
 
 export class StateControl {
 
@@ -7,6 +8,7 @@ export class StateControl {
     static lktAdminEnabled: Ref<boolean> = ref(true);
     static lktAppLoading: Ref<boolean> = ref(true);
     static lktAppReady: Ref<boolean> = ref(false);
+    static lktAppSetup: Ref<LktObject> = ref({});
 
     static lktMainMenu?: Menu = undefined;
     static lktBottomBar?: Menu = undefined;
@@ -14,4 +16,6 @@ export class StateControl {
     static hasMainHeader?: boolean | (() => boolean) = true;
     static hasMainMenu?: boolean | (() => boolean) = true;
     static hasBottomBar?: boolean | (() => boolean) = true;
+
+    static setup?: AppSetupConfig = undefined;
 }

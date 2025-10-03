@@ -30,7 +30,7 @@ import LktCounter from "lkt-counter";
 import LktDot from "lkt-dot";
 import LktBanner from "lkt-banner-box";
 import LktTabs from "lkt-tabs";
-import {AppSize} from "lkt-vue-kernel";
+import {AppSize, LktObject} from "lkt-vue-kernel";
 import {StateControl} from "./state/StateControl";
 import LktAppComponent from "./components/LktAppComponent.vue";
 import {LktAppConfig} from "./config/LktAppConfig";
@@ -81,11 +81,14 @@ const LktVueApp: Plugin = {
         if (cfg.hasMainMenu) StateControl.hasMainMenu = cfg.hasMainMenu;
         if (cfg.hasBottomBar) StateControl.hasBottomBar = cfg.hasBottomBar;
 
+        if (cfg.setup) StateControl.setup = cfg.setup;
+
         // App-level provide global vars
         app.provide('lktAppSize', StateControl.lktAppSize);
         app.provide('lktAdminEnabled', StateControl.lktAdminEnabled);
         app.provide('lktAppLoading', StateControl.lktAppLoading);
         app.provide('lktAppReady', StateControl.lktAppReady);
+        app.provide('lktAppSetup', StateControl.lktAppSetup);
 
         // Load all vuex storages
         app.use(getVuexStore());
@@ -139,6 +142,10 @@ export const setLktAdminEnabled = (state: boolean) => {
 
 export const getLktAdminEnabled = (): Ref<boolean> => {
     return StateControl.lktAdminEnabled;
+}
+
+export const getLktAppSetup = (): Ref<LktObject> => {
+    return StateControl.lktAppSetup;
 }
 
 export {

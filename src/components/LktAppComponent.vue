@@ -14,6 +14,8 @@ import {
     setLktAppReady
 } from "./../functions/state-control-functions";
 import {MenuController} from "lkt-vue-kernel";
+import {httpCall} from "lkt-http-client";
+import {setI18n} from "lkt-i18n";
 
 const ready = getLktAppReady(),
     loading = getLktAppLoading(),
@@ -25,13 +27,22 @@ const currentLang = ref('en');
 const hasMainHeader = ref(false);
 
 const loadApp = async () => {
-        // @todo (config in order to auto fetch i18n, initial config, etc.)
+    if (StateControl.setup?.i18nResource) {
+        const i18nResponse = await httpCall(StateControl.setup.i18nResource);
+        setI18n(i18nResponse.data);
+    }
 
-        nextTick(() => {
-            setLktAppReady(true);
-            setLktAppLoading(false);
-        })
-    };
+    if (StateControl.setup?.setupResource) {
+        const setupResponse = await httpCall(StateControl.setup.setupResource);
+        StateControl.lktAppSetup.value = setupResponse.data;
+        console.log('hasSetup resource: ', setupResponse.data)
+    }
+
+    nextTick(() => {
+        setLktAppReady(true);
+        setLktAppLoading(false);
+    })
+};
 
 const computedContentClass = computed(() => {
     let r = [];
@@ -64,7 +75,6 @@ const computedCanRenderBottomBar = computed(() => {
         })))
         ;
 })
-
 
 
 const computedCanRenderMainMenu = computed(() => {
