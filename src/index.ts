@@ -30,6 +30,7 @@ import LktCounter from "lkt-counter";
 import LktDot from "lkt-dot";
 import LktBanner from "lkt-banner-box";
 import LktTabs from "lkt-tabs";
+import LktCalendar from "lkt-calendar";
 import {AppSize, LktObject} from "lkt-vue-kernel";
 import {StateControl} from "./state/StateControl";
 import LktAppComponent from "./components/LktAppComponent.vue";
@@ -99,6 +100,7 @@ const LktVueApp: Plugin = {
         if (app.component('lkt-banner') === undefined) app.use(LktBanner);
         if (app.component('lkt-box') === undefined) app.use(LktBox);
         if (app.component('lkt-button') === undefined) app.use(LktButton);
+        if (app.component('lkt-calendar') === undefined) app.use(LktCalendar);
         if (app.component('lkt-chart') === undefined) app.use(LktCharts);
         if (app.component('lkt-counter') === undefined) app.use(LktCounter);
         if (app.component('lkt-dot') === undefined) app.use(LktDot);

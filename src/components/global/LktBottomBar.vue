@@ -14,12 +14,13 @@ const props = withDefaults(defineProps<{
 const route = useRoute();
 const canRender = ref(false);
 
-const checkVisibility = () => {
-    return StateControl.lktBottomBar
+const checkVisibility = (): boolean => {
+    return typeof StateControl.lktBottomBar?.modelValue !== 'undefined'
         && StateControl.lktBottomBar.modelValue?.length > 0
-        && (StateControl.hasBottomBar === true || (typeof StateControl.hasBottomBar === 'function' && StateControl.hasBottomBar({
-            route,
-        })));
+        && (
+            StateControl.hasBottomBar === true
+            || (typeof StateControl.hasBottomBar === 'function' && StateControl.hasBottomBar({route}))
+        );
 }
 
 watch(route, () => {

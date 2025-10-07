@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {ButtonConfig, ButtonType} from "lkt-vue-kernel";
-import {computed, ref, watch} from "vue";
-import {StateControl} from "@/state/StateControl";
+import {ref, watch} from "vue";
+import {StateControl} from "../../state/StateControl";
 import {useRoute} from "vue-router";
 
 const props = withDefaults(defineProps<{

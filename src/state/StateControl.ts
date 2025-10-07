@@ -1,6 +1,7 @@
 import {ref, Ref} from "vue";
 import {AppSize, LktObject, Menu} from "lkt-vue-kernel";
 import {AppSetupConfig} from "../config/partials/AppSetupConfig";
+import {RouteLocationNormalizedLoaded} from "vue-router";
 
 export class StateControl {
 
@@ -13,9 +14,9 @@ export class StateControl {
     static lktMainMenu?: Menu = undefined;
     static lktBottomBar?: Menu = undefined;
 
-    static hasMainHeader?: boolean | (() => boolean) = true;
-    static hasMainMenu?: boolean | (() => boolean) = true;
-    static hasBottomBar?: boolean | (() => boolean) = true;
+    static hasMainHeader?: boolean | ((args: { route: RouteLocationNormalizedLoaded}) => boolean) = true;
+    static hasMainMenu?: boolean | ((args: { route: RouteLocationNormalizedLoaded}) => boolean) = true;
+    static hasBottomBar?: boolean | ((args: { route: RouteLocationNormalizedLoaded}) => boolean) = true;
 
     static setup?: AppSetupConfig = undefined;
 }

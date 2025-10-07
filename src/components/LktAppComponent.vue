@@ -68,7 +68,8 @@ onMounted(async () => {
 
 const computedCanRenderBottomBar = computed(() => {
     return StateControl.lktBottomBar
-        && StateControl.lktBottomBar.modelValue?.length > 0
+        && typeof StateControl.lktBottomBar?.modelValue !== 'undefined'
+        && StateControl.lktBottomBar?.modelValue?.length > 0
         && (StateControl.hasBottomBar === true || (typeof StateControl.hasBottomBar === 'function' && StateControl.hasBottomBar({
             route,
         })))
@@ -78,7 +79,8 @@ const computedCanRenderBottomBar = computed(() => {
 
 const computedCanRenderMainMenu = computed(() => {
     return StateControl.lktMainMenu
-        && StateControl.lktMainMenu.modelValue?.length > 0
+        && typeof StateControl.lktMainMenu?.modelValue !== 'undefined'
+        && StateControl.lktMainMenu?.modelValue?.length > 0
         && (StateControl.hasMainMenu === true || (typeof StateControl.hasMainMenu === 'function' && StateControl.hasMainMenu({
             route
         })))

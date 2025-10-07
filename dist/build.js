@@ -1,71 +1,186 @@
-import D from "lkt-tooltip";
-import N from "lkt-field";
-import F from "lkt-table";
-import j from "lkt-button";
-import K from "lkt-anchor";
-import O from "lkt-loader";
-import U, { setCanvas as W } from "lkt-modal";
-import q from "lkt-item-crud";
-import G from "lkt-tag";
-import { getVuexStore as J } from "lkt-vuex-tools";
-import Q from "lkt-paginator";
-import X from "lkt-polymorphic-element";
-import Y from "lkt-charts";
-import Z from "lkt-icon";
-import tt from "lkt-box";
-import et from "lkt-menu";
-import ot from "lkt-http-info";
-import nt from "lkt-step-process";
-import it from "lkt-accordion";
-import at from "lkt-progress";
-import st from "lkt-image";
-import rt, { setToastCanvas as lt } from "lkt-toast";
-import ut from "lkt-header";
-import mt from "lkt-form";
-import dt from "lkt-vue-admin";
-import ct from "lkt-web-page";
-import kt from "lkt-counter";
-import ft from "lkt-dot";
-import pt from "lkt-banner-box";
-import vt from "lkt-tabs";
-import { ref as r, defineComponent as y, watch as v, resolveComponent as d, createElementBlock as g, openBlock as a, createBlock as m, mergeProps as z, unref as k, createCommentVNode as R, createElementVNode as b, createVNode as A, normalizeProps as ht, guardReactiveProps as Mt, withCtx as E, computed as H, onMounted as Lt, normalizeClass as Bt, resolveDynamicComponent as _t, nextTick as At } from "vue";
-import { AppSize as yt, ButtonType as gt, MenuController as w } from "lkt-vue-kernel";
-import { useRoute as C } from "vue-router";
-import { httpCall as x } from "lkt-http-client";
-import { setI18n as bt } from "lkt-i18n";
-const i = class i {
+import G from "lkt-tooltip";
+import J from "lkt-field";
+import ee from "lkt-table";
+import te from "lkt-button";
+import ae from "lkt-anchor";
+import le from "lkt-loader";
+import oe, { setCanvas as ne } from "lkt-modal";
+import ue from "lkt-item-crud";
+import ie from "lkt-tag";
+import { getVuexStore as se } from "lkt-vuex-tools";
+import re from "lkt-paginator";
+import de from "lkt-polymorphic-element";
+import me from "lkt-charts";
+import ce from "lkt-icon";
+import ve from "lkt-box";
+import ke from "lkt-menu";
+import fe from "lkt-http-info";
+import pe from "lkt-step-process";
+import he from "lkt-accordion";
+import ye from "lkt-progress";
+import Me from "lkt-image";
+import ge, { setToastCanvas as Le } from "lkt-toast";
+import Be from "lkt-header";
+import _e from "lkt-form";
+import be from "lkt-vue-admin";
+import Ae from "lkt-web-page";
+import we from "lkt-counter";
+import Ve from "lkt-dot";
+import De from "lkt-banner-box";
+import He from "lkt-tabs";
+import { defineComponent as R, ref as s, watch as p, nextTick as Q, computed as H, resolveComponent as L, createElementBlock as _, openBlock as r, createElementVNode as V, createCommentVNode as T, createVNode as b, normalizeProps as C, guardReactiveProps as F, unref as g, withCtx as N, mergeProps as z, createStaticVNode as Re, Fragment as U, renderList as j, createBlock as B, normalizeClass as X, onMounted as xe, resolveDynamicComponent as Ye } from "vue";
+import { isDate as Ce, date as D } from "lkt-date-tools";
+import { ButtonType as Z, FieldType as K, AppSize as Fe, MenuController as q } from "lkt-vue-kernel";
+import { useRoute as $ } from "vue-router";
+import { httpCall as W } from "lkt-http-client";
+import { setI18n as Te } from "lkt-i18n";
+const ze = { class: "lkt-calendar" }, Ee = { class: "calendar" }, Se = { class: "lkt-calendar--header-grid" }, Pe = { class: "lkt-calendar--header-text lkt-flex-row" }, Ie = {
+  key: 0,
+  class: "lkt-calendar--day-grid"
+}, Ne = { class: "lkt-calendar--day lkt-calendar--filling-day" }, $e = /* @__PURE__ */ R({
+  __name: "LktCalendar",
+  props: {
+    modelValue: {},
+    events: {},
+    disabled: { type: [Boolean, Object] }
+  },
+  emits: [
+    "update:modelValue"
+  ],
+  setup(e, { emit: n }) {
+    const f = n, h = e, a = s(h.modelValue);
+    p(() => h.modelValue, (m) => a.value = m, { deep: !0 }), p(a, (m) => f("update:modelValue", m), { deep: !0 });
+    const d = s(/* @__PURE__ */ new Date()), l = s(/* @__PURE__ */ new Date());
+    Ce(a.value) && typeof a.value < "u" && (l.value = new Date(a.value.getFullYear(), a.value.getMonth(), a.value.getDate()));
+    const u = s(l.value.getFullYear()), o = s(l.value.getMonth()), A = s(!1), y = s(D("Y-m", l.value));
+    p(A, (m) => {
+      m && Q(() => A.value = !1);
+    });
+    const x = H(() => new Date(u.value, o.value + 1, 0).getDate()), i = H(() => new Date(u.value, o.value, 1).getDay()), c = () => {
+      o.value > 11 && (o.value = 0, u.value += 1), o.value += 1, l.value.setFullYear(u.value, o.value), l.value = new Date(l.value), y.value = D("Y-m", l.value);
+    }, v = () => {
+      o.value < 0 && (o.value = 11, u.value -= 1), o.value -= 1, l.value.setFullYear(u.value, o.value), l.value = new Date(l.value), y.value = D("Y-m", l.value);
+    }, E = (m) => typeof a.value > "u" || a.value.getFullYear() !== u.value || a.value.getMonth() !== o.value ? !1 : a.value.getDate() === m, S = (m) => typeof a.value > "u" || d.value.getFullYear() !== u.value || d.value.getMonth() !== o.value ? !1 : d.value.getDate() === m, P = (m) => ({
+      "is-picked": E(m),
+      "is-today": S(m)
+    }), I = (m) => {
+      var M;
+      typeof a.value > "u" ? a.value = new Date(u.value, o.value, m) : ((M = a.value) == null || M.setFullYear(u.value, o.value, m), a.value = new Date(a.value));
+    };
+    return p(u, () => {
+      l.value.setFullYear(u.value, o.value), l.value = new Date(l.value), y.value = D("Y-m", l.value);
+    }, { deep: !0 }), p(o, () => {
+      l.value.setFullYear(u.value, o.value), l.value = new Date(l.value), y.value = D("Y-m", l.value);
+    }, { deep: !0 }), (m, M) => {
+      const Y = L("lkt-button"), O = L("lkt-field");
+      return r(), _("div", ze, [
+        V("div", Ee, [
+          V("header", Se, [
+            b(Y, C(F({
+              class: "lkt-calendar--day",
+              icon: "lkt-icn-triangle-left",
+              events: {
+                click: v
+              }
+            })), null, 16),
+            b(Y, C(F({
+              type: g(Z).Tooltip,
+              text: y.value,
+              class: "lkt-calendar--header-text"
+            })), {
+              tooltip: N(() => [
+                V("div", Pe, [
+                  b(O, z({
+                    modelValue: u.value,
+                    "onUpdate:modelValue": M[0] || (M[0] = (w) => u.value = w)
+                  }, {
+                    type: g(K).Number,
+                    label: "Year"
+                  }), null, 16, ["modelValue"]),
+                  b(O, z({
+                    modelValue: o.value,
+                    "onUpdate:modelValue": M[1] || (M[1] = (w) => o.value = w)
+                  }, {
+                    type: g(K).Select,
+                    label: "Month",
+                    options: [
+                      { value: 0, label: "1" },
+                      { value: 1, label: "2" },
+                      { value: 2, label: "3" },
+                      { value: 3, label: "4" },
+                      { value: 4, label: "5" },
+                      { value: 5, label: "6" },
+                      { value: 6, label: "7" },
+                      { value: 7, label: "8" },
+                      { value: 8, label: "9" },
+                      { value: 9, label: "10" },
+                      { value: 10, label: "11" },
+                      { value: 11, label: "12" }
+                    ]
+                  }), null, 16, ["modelValue"])
+                ])
+              ]),
+              _: 1
+            }, 16),
+            b(Y, C(F({
+              class: "lkt-calendar--day",
+              icon: "lkt-icn-triangle-right",
+              events: {
+                click: c
+              }
+            })), null, 16)
+          ]),
+          A.value ? T("", !0) : (r(), _("div", Ie, [
+            M[2] || (M[2] = Re('<div class="lkt-calendar--day lkt-calendar--week-day">Su</div><div class="lkt-calendar--day lkt-calendar--week-day">Mo</div><div class="lkt-calendar--day lkt-calendar--week-day">Tu</div><div class="lkt-calendar--day lkt-calendar--week-day">We</div><div class="lkt-calendar--day lkt-calendar--week-day">Th</div><div class="lkt-calendar--day lkt-calendar--week-day">Fr</div><div class="lkt-calendar--day lkt-calendar--week-day">Sa</div>', 7)),
+            (r(!0), _(U, null, j(i.value, (w) => (r(), _("div", Ne))), 256)),
+            (r(!0), _(U, null, j(x.value, (w) => (r(), B(Y, {
+              class: X(["lkt-calendar--day", P(w)]),
+              text: w.toString(),
+              onClick: () => I(w)
+            }, null, 8, ["class", "text", "onClick"]))), 256))
+          ]))
+        ]),
+        M[3] || (M[3] = V("div", { class: "display-selected" }, [
+          V("p", { class: "selected" })
+        ], -1))
+      ]);
+    };
+  }
+}), Oe = {
+  install: (e, n) => {
+    e.component("lkt-calendar", $e);
+  }
+}, k = class k {
 };
-i.lktAppSize = r(yt.MD), i.lktAdminEnabled = r(!0), i.lktAppLoading = r(!0), i.lktAppReady = r(!1), i.lktAppSetup = r({}), i.lktMainMenu = void 0, i.lktBottomBar = void 0, i.hasMainHeader = !0, i.hasMainMenu = !0, i.hasBottomBar = !0, i.setup = void 0;
-let e = i;
-const Ht = /* @__PURE__ */ y({
+k.lktAppSize = s(Fe.MD), k.lktAdminEnabled = s(!0), k.lktAppLoading = s(!0), k.lktAppReady = s(!1), k.lktAppSetup = s({}), k.lktMainMenu = void 0, k.lktBottomBar = void 0, k.hasMainHeader = !0, k.hasMainMenu = !0, k.hasBottomBar = !0, k.setup = void 0;
+let t = k;
+const Ue = /* @__PURE__ */ R({
   __name: "LktBottomBar",
   props: {
     lang: { default: "" },
     loading: { type: Boolean, default: !1 }
   },
-  setup(t) {
-    const o = C(), u = r(!1), c = () => {
-      var s;
-      return e.lktBottomBar && ((s = e.lktBottomBar.modelValue) == null ? void 0 : s.length) > 0 && (e.hasBottomBar === !0 || typeof e.hasBottomBar == "function" && e.hasBottomBar({
-        route: o
-      }));
+  setup(e) {
+    const n = $(), f = s(!1), h = () => {
+      var a, d;
+      return typeof ((a = t.lktBottomBar) == null ? void 0 : a.modelValue) < "u" && ((d = t.lktBottomBar.modelValue) == null ? void 0 : d.length) > 0 && (t.hasBottomBar === !0 || typeof t.hasBottomBar == "function" && t.hasBottomBar({ route: n }));
     };
-    return v(o, () => {
-      u.value = c();
-    }, { flush: "pre", immediate: !0, deep: !0 }), (s, l) => {
-      const f = d("lkt-menu"), p = d("lkt-loader");
-      return a(), g("div", null, [
-        t.loading ? (a(), m(p, { key: 1 })) : (a(), m(f, z({ key: 0 }, k(e).lktBottomBar, {
+    return p(n, () => {
+      f.value = h();
+    }, { flush: "pre", immediate: !0, deep: !0 }), (a, d) => {
+      const l = L("lkt-menu"), u = L("lkt-loader");
+      return r(), _("div", null, [
+        e.loading ? (r(), B(u, { key: 1 })) : (r(), B(l, z({ key: 0 }, g(t).lktBottomBar, {
           "menu-key": "lkt-bottom-bar",
           class: "bottom-bar"
         }), null, 16))
       ]);
     };
   }
-}), Rt = {
+}), je = {
   key: 0,
   class: "main-header"
-}, Ct = { class: "main-header-intro" }, Vt = /* @__PURE__ */ y({
+}, Ke = { class: "main-header-intro" }, We = /* @__PURE__ */ R({
   __name: "LktMainHeader",
   props: {
     hasMainHeader: { type: Boolean, default: !1 },
@@ -73,145 +188,145 @@ const Ht = /* @__PURE__ */ y({
     lang: { default: "" }
   },
   emits: ["update:hasMainHeader"],
-  setup(t, { emit: o }) {
-    const u = t, c = o, s = C(), l = r(!1), f = r(u.hasMainHeader);
-    v(() => u.hasMainHeader, (h) => f.value = h), v(f, (h) => c("update:hasMainHeader", h));
-    const p = () => e.hasMainHeader === !0 || typeof e.hasMainHeader == "function" && e.hasMainHeader({
-      route: s
+  setup(e, { emit: n }) {
+    const f = e, h = n, a = $(), d = s(!1), l = s(f.hasMainHeader);
+    p(() => f.hasMainHeader, (o) => l.value = o), p(l, (o) => h("update:hasMainHeader", o));
+    const u = () => t.hasMainHeader === !0 || typeof t.hasMainHeader == "function" && t.hasMainHeader({
+      route: a
     });
-    return v(s, () => {
-      l.value = p(), f.value = l.value;
-    }, { flush: "pre", immediate: !0, deep: !0 }), (h, _) => {
-      const M = d("lkt-button");
-      return l.value ? (a(), g("div", Rt, [
-        b("div", Ct, [
-          A(M, ht(Mt({
-            type: k(gt).Menu,
+    return p(a, () => {
+      d.value = u(), l.value = d.value;
+    }, { flush: "pre", immediate: !0, deep: !0 }), (o, A) => {
+      const y = L("lkt-button");
+      return d.value ? (r(), _("div", je, [
+        V("div", Ke, [
+          b(y, C(F({
+            type: g(Z).Menu,
             menuKey: "lkt-main-menu"
           })), {
-            default: E(() => [..._[0] || (_[0] = [
-              b("div", { class: "menu-btn" }, [
-                b("div", { class: "menu-btn--icon" })
+            default: N(() => [...A[0] || (A[0] = [
+              V("div", { class: "menu-btn" }, [
+                V("div", { class: "menu-btn--icon" })
               ], -1)
             ])]),
             _: 1
           }, 16)
         ])
-      ])) : R("", !0);
+      ])) : T("", !0);
     };
   }
-}), xt = /* @__PURE__ */ y({
+}), Qe = /* @__PURE__ */ R({
   __name: "LktMainMenu",
   props: {
     loading: { type: Boolean, default: !1 }
   },
-  setup(t) {
-    const o = () => w.closeMenu("_");
-    return (u, c) => {
-      const s = d("lkt-menu"), l = d("lkt-loader");
-      return a(), g("div", null, [
-        t.loading ? (a(), m(l, { key: 1 })) : (a(), m(s, z({ key: 0 }, k(e).lktMainMenu, {
+  setup(e) {
+    const n = () => q.closeMenu("_");
+    return (f, h) => {
+      const a = L("lkt-menu"), d = L("lkt-loader");
+      return r(), _("div", null, [
+        e.loading ? (r(), B(d, { key: 1 })) : (r(), B(a, z({ key: 0 }, g(t).lktMainMenu, {
           "menu-key": "lkt-main-menu",
-          onClickOutside: o
+          onClickOutside: n
         }), null, 16))
       ]);
     };
   }
-}), zt = (t) => {
-  e.lktAppReady.value = t;
-}, Et = () => e.lktAppReady, wt = (t) => {
-  e.lktAppLoading.value = t;
-}, Pt = () => e.lktAppLoading, ve = /* @__PURE__ */ y({
+}), Xe = (e) => {
+  t.lktAppReady.value = e;
+}, Ze = () => t.lktAppReady, qe = (e) => {
+  t.lktAppLoading.value = e;
+}, Ge = () => t.lktAppLoading, Tt = /* @__PURE__ */ R({
   __name: "LktAppComponent",
-  setup(t) {
-    const o = Et(), u = Pt(), c = r(null), s = r(null), l = C(), f = r("en"), p = r(!1), h = async () => {
-      var n, L;
-      if ((n = e.setup) != null && n.i18nResource) {
-        const B = await x(e.setup.i18nResource);
-        bt(B.data);
+  setup(e) {
+    const n = Ze(), f = Ge(), h = s(null), a = s(null), d = $(), l = s("en"), u = s(!1), o = async () => {
+      var i, c;
+      if ((i = t.setup) != null && i.i18nResource) {
+        const v = await W(t.setup.i18nResource);
+        Te(v.data);
       }
-      if ((L = e.setup) != null && L.setupResource) {
-        const B = await x(e.setup.setupResource);
-        e.lktAppSetup.value = B.data;
+      if ((c = t.setup) != null && c.setupResource) {
+        const v = await W(t.setup.setupResource);
+        t.lktAppSetup.value = v.data;
       }
-      At(() => {
-        zt(!0), wt(!1);
+      Q(() => {
+        Xe(!0), qe(!1);
       });
-    }, _ = H(() => {
-      let n = [];
-      return w.getMenuStatus("lkt-main-menu") && n.push("menu-opened"), M.value && n.push("has-bottom-bar"), p.value && n.push("has-main-header"), n.push(`route-is-${l.name}`), n.join(" ");
+    }, A = H(() => {
+      let i = [];
+      return q.getMenuStatus("lkt-main-menu") && i.push("menu-opened"), y.value && i.push("has-bottom-bar"), u.value && i.push("has-main-header"), i.push(`route-is-${d.name}`), i.join(" ");
     });
-    v(c, (n) => {
-      W(c.value);
-    }), v(s, (n) => {
-      lt(s.value);
-    }), Lt(async () => {
-      await h();
+    p(h, (i) => {
+      ne(h.value);
+    }), p(a, (i) => {
+      Le(a.value);
+    }), xe(async () => {
+      await o();
     });
-    const M = H(() => {
-      var n;
-      return e.lktBottomBar && ((n = e.lktBottomBar.modelValue) == null ? void 0 : n.length) > 0 && (e.hasBottomBar === !0 || typeof e.hasBottomBar == "function" && e.hasBottomBar({
-        route: l
+    const y = H(() => {
+      var i, c, v;
+      return t.lktBottomBar && typeof ((i = t.lktBottomBar) == null ? void 0 : i.modelValue) < "u" && ((v = (c = t.lktBottomBar) == null ? void 0 : c.modelValue) == null ? void 0 : v.length) > 0 && (t.hasBottomBar === !0 || typeof t.hasBottomBar == "function" && t.hasBottomBar({
+        route: d
       }));
-    }), V = H(() => {
-      var n;
-      return e.lktMainMenu && ((n = e.lktMainMenu.modelValue) == null ? void 0 : n.length) > 0 && (e.hasMainMenu === !0 || typeof e.hasMainMenu == "function" && e.hasMainMenu({
-        route: l
+    }), x = H(() => {
+      var i, c, v;
+      return t.lktMainMenu && typeof ((i = t.lktMainMenu) == null ? void 0 : i.modelValue) < "u" && ((v = (c = t.lktMainMenu) == null ? void 0 : c.modelValue) == null ? void 0 : v.length) > 0 && (t.hasMainMenu === !0 || typeof t.hasMainMenu == "function" && t.hasMainMenu({
+        route: d
       }));
     });
-    return v(l, () => {
-      V.value, M.value;
-    }, { flush: "pre", immediate: !0, deep: !0 }), (n, L) => {
-      const B = d("lkt-modal-canvas"), P = d("lkt-toast-canvas"), T = d("router-view"), I = d("lkt-loader");
-      return a(), g("div", {
-        class: Bt(["main-content", _.value])
+    return p(d, () => {
+      x.value, y.value;
+    }, { flush: "pre", immediate: !0, deep: !0 }), (i, c) => {
+      const v = L("lkt-modal-canvas"), E = L("lkt-toast-canvas"), S = L("router-view"), P = L("lkt-loader");
+      return r(), _("div", {
+        class: X(["main-content", A.value])
       }, [
-        k(o) && !k(u) ? (a(), m(T, { key: 0 }, {
-          default: E(({ Component: S }) => [
-            A(Vt, {
-              hasMainHeader: p.value,
-              "onUpdate:hasMainHeader": L[0] || (L[0] = ($) => p.value = $),
-              lang: f.value,
-              loading: k(u)
+        g(n) && !g(f) ? (r(), B(S, { key: 0 }, {
+          default: N(({ Component: I }) => [
+            b(We, {
+              hasMainHeader: u.value,
+              "onUpdate:hasMainHeader": c[0] || (c[0] = (m) => u.value = m),
+              lang: l.value,
+              loading: g(f)
             }, null, 8, ["hasMainHeader", "lang", "loading"]),
-            V.value ? (a(), m(xt, {
+            x.value ? (r(), B(Qe, {
               key: 0,
-              loading: k(u)
-            }, null, 8, ["loading"])) : R("", !0),
-            (a(), m(_t(S))),
-            M.value ? (a(), m(Ht, {
+              loading: g(f)
+            }, null, 8, ["loading"])) : T("", !0),
+            (r(), B(Ye(I))),
+            y.value ? (r(), B(Ue, {
               key: 1,
-              loading: k(u)
-            }, null, 8, ["loading"])) : R("", !0),
-            A(B, {
+              loading: g(f)
+            }, null, 8, ["loading"])) : T("", !0),
+            b(v, {
               ref_key: "modalCanvas",
-              ref: c
+              ref: h
             }, null, 512),
-            A(P, {
+            b(E, {
               ref_key: "toastCanvas",
-              ref: s
+              ref: a
             }, null, 512)
           ]),
           _: 1
-        })) : (a(), m(I, { key: 1 }))
+        })) : (r(), B(P, { key: 1 }))
       ], 2);
     };
   }
-}), he = {
-  install: (t, o) => {
-    o.mainMenu && (e.lktMainMenu = o.mainMenu), o.bottomBar && (e.lktBottomBar = o.bottomBar), o.hasMainHeader && (e.hasMainHeader = o.hasMainHeader), o.hasMainMenu && (e.hasMainMenu = o.hasMainMenu), o.hasBottomBar && (e.hasBottomBar = o.hasBottomBar), o.setup && (e.setup = o.setup), t.provide("lktAppSize", e.lktAppSize), t.provide("lktAdminEnabled", e.lktAdminEnabled), t.provide("lktAppLoading", e.lktAppLoading), t.provide("lktAppReady", e.lktAppReady), t.provide("lktAppSetup", e.lktAppSetup), t.use(J()), t.component("lkt-accordion") === void 0 && t.use(it), t.component("lkt-anchor") === void 0 && t.use(K), t.component("lkt-banner") === void 0 && t.use(pt), t.component("lkt-box") === void 0 && t.use(tt), t.component("lkt-button") === void 0 && t.use(j), t.component("lkt-chart") === void 0 && t.use(Y), t.component("lkt-counter") === void 0 && t.use(kt), t.component("lkt-dot") === void 0 && t.use(ft), t.component("lkt-field") === void 0 && t.use(N), t.component("lkt-form") === void 0 && t.use(mt), t.component("lkt-header") === void 0 && t.use(ut), t.component("lkt-http-info") === void 0 && t.use(ot), t.component("lkt-icon") === void 0 && t.use(Z), t.component("lkt-image") === void 0 && t.use(st), t.component("lkt-item-crud") === void 0 && t.use(q), t.component("lkt-loader") === void 0 && t.use(O), t.component("lkt-menu") === void 0 && t.use(et), t.component("lkt-modal") === void 0 && t.use(U), t.component("lkt-paginator") === void 0 && t.use(Q), t.component("lkt-polymorphic-element") === void 0 && t.use(X), t.component("lkt-progress") === void 0 && t.use(at), t.component("lkt-step-process") === void 0 && t.use(nt), t.component("lkt-table") === void 0 && t.use(F), t.component("lkt-tabs") === void 0 && t.use(vt), t.component("lkt-tag") === void 0 && t.use(G), t.component("lkt-toast") === void 0 && t.use(rt), t.component("lkt-tooltip") === void 0 && t.use(D), t.component("lkt-vue-admin") === void 0 && t.use(dt), t.component("lkt-web-page") === void 0 && t.use(ct);
+}), zt = {
+  install: (e, n) => {
+    n.mainMenu && (t.lktMainMenu = n.mainMenu), n.bottomBar && (t.lktBottomBar = n.bottomBar), n.hasMainHeader && (t.hasMainHeader = n.hasMainHeader), n.hasMainMenu && (t.hasMainMenu = n.hasMainMenu), n.hasBottomBar && (t.hasBottomBar = n.hasBottomBar), n.setup && (t.setup = n.setup), e.provide("lktAppSize", t.lktAppSize), e.provide("lktAdminEnabled", t.lktAdminEnabled), e.provide("lktAppLoading", t.lktAppLoading), e.provide("lktAppReady", t.lktAppReady), e.provide("lktAppSetup", t.lktAppSetup), e.use(se()), e.component("lkt-accordion") === void 0 && e.use(he), e.component("lkt-anchor") === void 0 && e.use(ae), e.component("lkt-banner") === void 0 && e.use(De), e.component("lkt-box") === void 0 && e.use(ve), e.component("lkt-button") === void 0 && e.use(te), e.component("lkt-calendar") === void 0 && e.use(Oe), e.component("lkt-chart") === void 0 && e.use(me), e.component("lkt-counter") === void 0 && e.use(we), e.component("lkt-dot") === void 0 && e.use(Ve), e.component("lkt-field") === void 0 && e.use(J), e.component("lkt-form") === void 0 && e.use(_e), e.component("lkt-header") === void 0 && e.use(Be), e.component("lkt-http-info") === void 0 && e.use(fe), e.component("lkt-icon") === void 0 && e.use(ce), e.component("lkt-image") === void 0 && e.use(Me), e.component("lkt-item-crud") === void 0 && e.use(ue), e.component("lkt-loader") === void 0 && e.use(le), e.component("lkt-menu") === void 0 && e.use(ke), e.component("lkt-modal") === void 0 && e.use(oe), e.component("lkt-paginator") === void 0 && e.use(re), e.component("lkt-polymorphic-element") === void 0 && e.use(de), e.component("lkt-progress") === void 0 && e.use(ye), e.component("lkt-step-process") === void 0 && e.use(pe), e.component("lkt-table") === void 0 && e.use(ee), e.component("lkt-tabs") === void 0 && e.use(He), e.component("lkt-tag") === void 0 && e.use(ie), e.component("lkt-toast") === void 0 && e.use(ge), e.component("lkt-tooltip") === void 0 && e.use(G), e.component("lkt-vue-admin") === void 0 && e.use(be), e.component("lkt-web-page") === void 0 && e.use(Ae);
   }
-}, Me = (t) => {
-  e.lktAppSize.value = t;
-}, Le = () => e.lktAppSize, Be = (t) => {
-  e.lktAdminEnabled.value = t;
-}, _e = () => e.lktAdminEnabled, Ae = () => e.lktAppSetup;
+}, Et = (e) => {
+  t.lktAppSize.value = e;
+}, St = () => t.lktAppSize, Pt = (e) => {
+  t.lktAdminEnabled.value = e;
+}, It = () => t.lktAdminEnabled, Nt = () => t.lktAppSetup;
 export {
-  ve as LktAppComponent,
-  he as default,
-  _e as getLktAdminEnabled,
-  Ae as getLktAppSetup,
-  Le as getLktAppSize,
-  Be as setLktAdminEnabled,
-  Me as setLktAppSize
+  Tt as LktAppComponent,
+  zt as default,
+  It as getLktAdminEnabled,
+  Nt as getLktAppSetup,
+  St as getLktAppSize,
+  Pt as setLktAdminEnabled,
+  Et as setLktAppSize
 };
