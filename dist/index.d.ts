@@ -10,6 +10,7 @@ import 'lkt-anchor/styles';
 import 'lkt-banner-box/styles';
 import 'lkt-box/styles';
 import 'lkt-button/styles';
+import 'lkt-calendar/styles';
 import 'lkt-charts/styles';
 import 'lkt-dot/styles';
 import 'lkt-field/styles';

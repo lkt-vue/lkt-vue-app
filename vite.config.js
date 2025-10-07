@@ -65,6 +65,7 @@ export default {
                 'lkt-step-process',
                 'lkt-object-tools',
                 'lkt-string-tools',
+                'lkt-calendar',
                 'axios',
                 'modern-normalize',
             ],
