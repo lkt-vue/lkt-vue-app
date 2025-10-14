@@ -82,6 +82,8 @@ const LktVueApp: Plugin = {
         if (cfg.hasMainHeader) StateControl.hasMainHeader = cfg.hasMainHeader;
         if (cfg.hasMainMenu) StateControl.hasMainMenu = cfg.hasMainMenu;
         if (cfg.hasBottomBar) StateControl.hasBottomBar = cfg.hasBottomBar;
+        if (cfg.replaceMainMenuButtonWithBack) StateControl.replaceMainMenuButtonWithBack = cfg.replaceMainMenuButtonWithBack;
+        if (cfg.mainHeader) StateControl.mainHeader.value = cfg.mainHeader;
 
         if (cfg.setup) StateControl.setup = cfg.setup;
 
@@ -154,3 +156,5 @@ export const getLktAppSetup = (): Ref<LktObject> => {
 export {
     LktAppComponent,
 };
+
+export {updateMainHeader} from "./functions/state-control-functions";

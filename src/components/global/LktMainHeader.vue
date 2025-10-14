@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {ButtonConfig, ButtonType} from "lkt-vue-kernel";
-import {ref, watch} from "vue";
+import {AnchorType, ButtonConfig, ButtonType, HeaderConfig} from "lkt-vue-kernel";
+import {computed, ref, watch} from "vue";
 import {StateControl} from "../../state/StateControl";
 import {useRoute} from "vue-router";
 
@@ -18,6 +18,7 @@ const emit = defineEmits(['update:hasMainHeader']);
 
 const route = useRoute();
 const canRender = ref(false);
+const replaceMainMenuButtonWithBack = ref(false);
 const hasMainHeaderRef = ref(props.hasMainHeader)
 
 watch(() => props.hasMainHeader, (v) => hasMainHeaderRef.value = v);
@@ -29,17 +30,38 @@ const checkVisibility = () => {
     })));
 }
 
+const checkReplaceMainMenuButtonWithBack = () => {
+    return (StateControl.replaceMainMenuButtonWithBack === true || (typeof StateControl.replaceMainMenuButtonWithBack === 'function' && StateControl.replaceMainMenuButtonWithBack({
+        route
+    })));
+}
+
 watch(route, () => {
     canRender.value = checkVisibility();
+    replaceMainMenuButtonWithBack.value = checkReplaceMainMenuButtonWithBack();
     hasMainHeaderRef.value = canRender.value;
 }, {flush: 'pre', immediate: true, deep: true});
+
+const computedMainHeaderConfig = computed(() => {
+    return <HeaderConfig>{
+        ...StateControl.mainHeader.value,
+    }
+})
 </script>
 
 <template>
 <div class="main-header"
      v-if="canRender">
-    <div class="main-header-intro">
-        <lkt-button v-bind="<ButtonConfig>{
+    <div class="main-header-intro" v-if="false">
+        <lkt-button v-if="replaceMainMenuButtonWithBack" v-bind="<ButtonConfig>{
+            type: ButtonType.Anchor,
+            anchor: {
+                type: AnchorType.RouterLinkBack,
+                icon: 'lkt-icn-arrow-left',
+            }
+        }">
+        </lkt-button>
+        <lkt-button v-else v-bind="<ButtonConfig>{
             type: ButtonType.Menu,
             menuKey: 'lkt-main-menu',
         }">
@@ -48,5 +70,7 @@ watch(route, () => {
             </div>
         </lkt-button>
     </div>
+
+    <lkt-header v-bind="computedMainHeaderConfig"/>
 </div>
 </template>

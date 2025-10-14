@@ -39,3 +39,4 @@ export declare const setLktAdminEnabled: (state: boolean) => void;
 export declare const getLktAdminEnabled: () => Ref<boolean>;
 export declare const getLktAppSetup: () => Ref<LktObject>;
 export { LktAppComponent, };
+export { updateMainHeader } from "./functions/state-control-functions";

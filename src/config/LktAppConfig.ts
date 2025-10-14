@@ -1,5 +1,5 @@
 import {AppRoutingConfig} from "./partials/AppRoutingConfig";
-import {Menu} from "lkt-vue-kernel";
+import {HeaderConfig, Menu} from "lkt-vue-kernel";
 import {AppSetupConfig} from "./partials/AppSetupConfig";
 
 export interface LktAppConfig {
@@ -12,4 +12,7 @@ export interface LktAppConfig {
     hasMainMenu?: boolean | (() => boolean)
     hasBottomBar?: boolean | (() => boolean)
     hasMainHeader?: boolean | (() => boolean)
+    replaceMainMenuButtonWithBack?: boolean | (() => boolean)
+
+    mainHeader?: HeaderConfig
 }
