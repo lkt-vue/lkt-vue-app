@@ -66,6 +66,7 @@ export default {
                 'lkt-object-tools',
                 'lkt-string-tools',
                 'lkt-calendar',
+                'lkt-session',
                 'axios',
                 'modern-normalize',
             ],

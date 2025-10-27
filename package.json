@@ -86,6 +86,7 @@
     "lkt-paginator": "^2.0.5",
     "lkt-polymorphic-element": "github:lkt-vue/lkt-polymorphic-element",
     "lkt-progress": "^2.0.0",
+    "lkt-session": "^1.0.6",
     "lkt-step-process": "^2.0.8",
     "lkt-string-tools": "^1.1.0",
     "lkt-table": "^2.0.45",

@@ -35,6 +35,7 @@ import {AppSize, LktObject} from "lkt-vue-kernel";
 import {StateControl} from "./state/StateControl";
 import LktAppComponent from "./components/LktAppComponent.vue";
 import {LktAppConfig} from "./config/LktAppConfig";
+import LktSession from "lkt-session";
 
 
 // Style: Browsers normalization
@@ -128,6 +129,8 @@ const LktVueApp: Plugin = {
         if (app.component('lkt-tooltip') === undefined) app.use(LktTooltip);
         if (app.component('lkt-vue-admin') === undefined) app.use(LktVueAdmin);
         if (app.component('lkt-web-page') === undefined) app.use(LktWebPage);
+
+        app.use(LktSession);
     }
 };
 

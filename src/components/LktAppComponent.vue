@@ -34,7 +34,9 @@ const loadApp = async () => {
 
     if (StateControl.setup?.setupResource) {
         const setupResponse = await httpCall(StateControl.setup.setupResource);
-        StateControl.lktAppSetup.value = setupResponse.data;
+        for (let k in setupResponse.data) {
+            StateControl.lktAppSetup.value[k] = setupResponse.data[k];
+        }
     }
 
     nextTick(() => {
