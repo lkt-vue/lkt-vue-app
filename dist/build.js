@@ -1,5 +1,5 @@
-import S from "lkt-tooltip";
-import D from "lkt-field";
+import D from "lkt-tooltip";
+import S from "lkt-field";
 import I from "lkt-table";
 import $ from "lkt-button";
 import F from "lkt-anchor";
@@ -36,11 +36,12 @@ import { DataState as ge } from "lkt-data-state";
 import { httpCall as x } from "lkt-http-client";
 import { setI18n as He } from "lkt-i18n";
 import be from "lkt-session";
+import Re from "lkt-doc-page";
 const a = class a {
 };
 a.lktAppSize = r(ye.MD), a.lktAdminEnabled = r(!0), a.lktAppLoading = r(!0), a.lktAppReady = r(!1), a.lktAppSetup = r({}), a.lktMainMenu = void 0, a.lktBottomBar = void 0, a.hasMainHeader = !0, a.hasMainMenu = !0, a.hasBottomBar = !0, a.replaceMainMenuButtonWithBack = !1, a.setup = void 0, a.mainHeader = r(void 0);
 let t = a;
-const Re = /* @__PURE__ */ H({
+const Ve = /* @__PURE__ */ H({
   __name: "LktBottomBar",
   props: {
     lang: { default: "" },
@@ -63,10 +64,10 @@ const Re = /* @__PURE__ */ H({
       ]);
     };
   }
-}), Ve = {
+}), Ce = {
   key: 0,
   class: "main-header"
-}, Ce = /* @__PURE__ */ H({
+}, xe = /* @__PURE__ */ H({
   __name: "LktMainHeader",
   props: {
     hasMainHeader: { type: Boolean, default: !1 },
@@ -91,13 +92,13 @@ const Re = /* @__PURE__ */ H({
     return (v, n) => {
       c("lkt-button");
       const l = c("lkt-header");
-      return i.value ? (u(), b("div", Ve, [
+      return i.value ? (u(), b("div", Ce, [
         g("", !0),
         y(l, ve(he(L.value)), null, 16)
       ])) : g("", !0);
     };
   }
-}), xe = /* @__PURE__ */ H({
+}), ze = /* @__PURE__ */ H({
   __name: "LktMainMenu",
   props: {
     loading: { type: Boolean, default: !1 }
@@ -114,21 +115,21 @@ const Re = /* @__PURE__ */ H({
       ]);
     };
   }
-}), ze = (e) => {
+}), We = (e) => {
   t.lktAppReady.value = e;
-}, We = () => t.lktAppReady, we = (e) => {
+}, we = () => t.lktAppReady, Ee = (e) => {
   t.lktAppLoading.value = e;
-}, Ee = () => t.lktAppLoading, Bt = (e) => {
+}, Pe = () => t.lktAppLoading, _t = (e) => {
   if (typeof t.mainHeader.value > "u") {
     t.mainHeader.value = e;
     return;
   }
   let o = new ge(t.mainHeader.value);
   o.increment(e), t.mainHeader.value = o.getData();
-}, Lt = /* @__PURE__ */ H({
+}, At = /* @__PURE__ */ H({
   __name: "LktAppComponent",
   setup(e) {
-    const o = We(), d = Ee(), p = r(null), s = r(null), i = C(), B = r("en"), k = r(!1), R = async () => {
+    const o = we(), d = Pe(), p = r(null), s = r(null), i = C(), B = r("en"), k = r(!1), R = async () => {
       var n, l;
       if ((n = t.setup) != null && n.i18nResource) {
         const m = await x(t.setup.i18nResource);
@@ -140,7 +141,7 @@ const Re = /* @__PURE__ */ H({
           t.lktAppSetup.value[_] = m.data[_];
       }
       Ae(() => {
-        ze(!0), we(!1);
+        We(!0), Ee(!1);
       });
     }, V = A(() => {
       let n = [];
@@ -173,18 +174,18 @@ const Re = /* @__PURE__ */ H({
       }, [
         h(o) && !h(d) ? (u(), f(w, { key: 0 }, {
           default: Le(({ Component: P }) => [
-            y(Ce, {
+            y(xe, {
               hasMainHeader: k.value,
               "onUpdate:hasMainHeader": l[0] || (l[0] = (T) => k.value = T),
               lang: B.value,
               loading: h(d)
             }, null, 8, ["hasMainHeader", "lang", "loading"]),
-            v.value ? (u(), f(xe, {
+            v.value ? (u(), f(ze, {
               key: 0,
               loading: h(d)
             }, null, 8, ["loading"])) : g("", !0),
             (u(), f(_e(P))),
-            L.value ? (u(), f(Re, {
+            L.value ? (u(), f(Ve, {
               key: 1,
               loading: h(d)
             }, null, 8, ["loading"])) : g("", !0),
@@ -202,22 +203,22 @@ const Re = /* @__PURE__ */ H({
       ], 2);
     };
   }
-}), _t = {
+}), yt = {
   install: (e, o) => {
-    o.mainMenu && (t.lktMainMenu = o.mainMenu), o.bottomBar && (t.lktBottomBar = o.bottomBar), o.hasMainHeader && (t.hasMainHeader = o.hasMainHeader), o.hasMainMenu && (t.hasMainMenu = o.hasMainMenu), o.hasBottomBar && (t.hasBottomBar = o.hasBottomBar), o.replaceMainMenuButtonWithBack && (t.replaceMainMenuButtonWithBack = o.replaceMainMenuButtonWithBack), o.mainHeader && (t.mainHeader.value = o.mainHeader), o.setup && (t.setup = o.setup), e.provide("lktAppSize", t.lktAppSize), e.provide("lktAdminEnabled", t.lktAdminEnabled), e.provide("lktAppLoading", t.lktAppLoading), e.provide("lktAppReady", t.lktAppReady), e.provide("lktAppSetup", t.lktAppSetup), e.use(G()), e.component("lkt-accordion") === void 0 && e.use(oe), e.component("lkt-anchor") === void 0 && e.use(F), e.component("lkt-banner") === void 0 && e.use(ke), e.component("lkt-box") === void 0 && e.use(Y), e.component("lkt-button") === void 0 && e.use($), e.component("lkt-calendar") === void 0 && e.use(pe), e.component("lkt-chart") === void 0 && e.use(Q), e.component("lkt-counter") === void 0 && e.use(de), e.component("lkt-dot") === void 0 && e.use(ce), e.component("lkt-field") === void 0 && e.use(D), e.component("lkt-form") === void 0 && e.use(le), e.component("lkt-header") === void 0 && e.use(se), e.component("lkt-http-info") === void 0 && e.use(ee), e.component("lkt-icon") === void 0 && e.use(X), e.component("lkt-image") === void 0 && e.use(ae), e.component("lkt-item-crud") === void 0 && e.use(U), e.component("lkt-loader") === void 0 && e.use(N), e.component("lkt-menu") === void 0 && e.use(Z), e.component("lkt-modal") === void 0 && e.use(j), e.component("lkt-paginator") === void 0 && e.use(J), e.component("lkt-polymorphic-element") === void 0 && e.use(K), e.component("lkt-progress") === void 0 && e.use(ne), e.component("lkt-step-process") === void 0 && e.use(te), e.component("lkt-table") === void 0 && e.use(I), e.component("lkt-tabs") === void 0 && e.use(fe), e.component("lkt-tag") === void 0 && e.use(q), e.component("lkt-toast") === void 0 && e.use(ie), e.component("lkt-tooltip") === void 0 && e.use(S), e.component("lkt-vue-admin") === void 0 && e.use(ue), e.component("lkt-web-page") === void 0 && e.use(me), e.use(be);
+    o.mainMenu && (t.lktMainMenu = o.mainMenu), o.bottomBar && (t.lktBottomBar = o.bottomBar), o.hasMainHeader && (t.hasMainHeader = o.hasMainHeader), o.hasMainMenu && (t.hasMainMenu = o.hasMainMenu), o.hasBottomBar && (t.hasBottomBar = o.hasBottomBar), o.replaceMainMenuButtonWithBack && (t.replaceMainMenuButtonWithBack = o.replaceMainMenuButtonWithBack), o.mainHeader && (t.mainHeader.value = o.mainHeader), o.setup && (t.setup = o.setup), e.provide("lktAppSize", t.lktAppSize), e.provide("lktAdminEnabled", t.lktAdminEnabled), e.provide("lktAppLoading", t.lktAppLoading), e.provide("lktAppReady", t.lktAppReady), e.provide("lktAppSetup", t.lktAppSetup), e.use(G()), e.component("lkt-accordion") === void 0 && e.use(oe), e.component("lkt-anchor") === void 0 && e.use(F), e.component("lkt-banner") === void 0 && e.use(ke), e.component("lkt-box") === void 0 && e.use(Y), e.component("lkt-button") === void 0 && e.use($), e.component("lkt-calendar") === void 0 && e.use(pe), e.component("lkt-chart") === void 0 && e.use(Q), e.component("lkt-counter") === void 0 && e.use(de), e.component("lkt-doc-page") === void 0 && e.use(Re), e.component("lkt-dot") === void 0 && e.use(ce), e.component("lkt-field") === void 0 && e.use(S), e.component("lkt-form") === void 0 && e.use(le), e.component("lkt-header") === void 0 && e.use(se), e.component("lkt-http-info") === void 0 && e.use(ee), e.component("lkt-icon") === void 0 && e.use(X), e.component("lkt-image") === void 0 && e.use(ae), e.component("lkt-item-crud") === void 0 && e.use(U), e.component("lkt-loader") === void 0 && e.use(N), e.component("lkt-menu") === void 0 && e.use(Z), e.component("lkt-modal") === void 0 && e.use(j), e.component("lkt-paginator") === void 0 && e.use(J), e.component("lkt-polymorphic-element") === void 0 && e.use(K), e.component("lkt-progress") === void 0 && e.use(ne), e.component("lkt-step-process") === void 0 && e.use(te), e.component("lkt-table") === void 0 && e.use(I), e.component("lkt-tabs") === void 0 && e.use(fe), e.component("lkt-tag") === void 0 && e.use(q), e.component("lkt-toast") === void 0 && e.use(ie), e.component("lkt-tooltip") === void 0 && e.use(D), e.component("lkt-vue-admin") === void 0 && e.use(ue), e.component("lkt-web-page") === void 0 && e.use(me), e.use(be);
   }
-}, At = (e) => {
+}, gt = (e) => {
   t.lktAppSize.value = e;
-}, yt = () => t.lktAppSize, gt = (e) => {
+}, Ht = () => t.lktAppSize, bt = (e) => {
   t.lktAdminEnabled.value = e;
-}, Ht = () => t.lktAdminEnabled, bt = () => t.lktAppSetup;
+}, Rt = () => t.lktAdminEnabled, Vt = () => t.lktAppSetup;
 export {
-  Lt as LktAppComponent,
-  _t as default,
-  Ht as getLktAdminEnabled,
-  bt as getLktAppSetup,
-  yt as getLktAppSize,
-  gt as setLktAdminEnabled,
-  At as setLktAppSize,
-  Bt as updateMainHeader
+  At as LktAppComponent,
+  yt as default,
+  Rt as getLktAdminEnabled,
+  Vt as getLktAppSetup,
+  Ht as getLktAppSize,
+  bt as setLktAdminEnabled,
+  gt as setLktAppSize,
+  _t as updateMainHeader
 };

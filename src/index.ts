@@ -54,6 +54,7 @@ import 'lkt-box/styles';
 import 'lkt-button/styles';
 import 'lkt-calendar/styles';
 import 'lkt-charts/styles';
+import 'lkt-doc-page/styles';
 import 'lkt-dot/styles';
 import 'lkt-field/styles';
 import 'lkt-header/styles';
@@ -73,6 +74,7 @@ import 'lkt-tag/styles';
 import 'lkt-toast/styles';
 import 'lkt-tooltip/styles';
 import 'lkt-vue-admin/styles';
+import LktDocPage from "lkt-doc-page";
 
 const LktVueApp: Plugin = {
     install: (app: App, cfg: LktAppConfig) => {
@@ -107,6 +109,7 @@ const LktVueApp: Plugin = {
         if (app.component('lkt-calendar') === undefined) app.use(LktCalendar);
         if (app.component('lkt-chart') === undefined) app.use(LktCharts);
         if (app.component('lkt-counter') === undefined) app.use(LktCounter);
+        if (app.component('lkt-doc-page') === undefined) app.use(LktDocPage);
         if (app.component('lkt-dot') === undefined) app.use(LktDot);
         if (app.component('lkt-field') === undefined) app.use(LktField);
         if (app.component('lkt-form') === undefined) app.use(LktForm);

@@ -12,6 +12,7 @@ import 'lkt-box/styles';
 import 'lkt-button/styles';
 import 'lkt-calendar/styles';
 import 'lkt-charts/styles';
+import 'lkt-doc-page/styles';
 import 'lkt-dot/styles';
 import 'lkt-field/styles';
 import 'lkt-header/styles';

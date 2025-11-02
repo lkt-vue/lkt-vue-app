@@ -36,6 +36,7 @@ export default {
                 'lkt-data-state',
                 'lkt-date-tools',
                 'lkt-field',
+                'lkt-doc-page',
                 'lkt-dot',
                 'lkt-flex-layout',
                 'lkt-form',
