@@ -109,7 +109,9 @@ watch(route, () => {
 
             <lkt-main-menu v-if="computedCanRenderMainMenu" :loading="loading"/>
 
-            <component :is="Component"/>
+            <div class="view-component">
+                <component :is="Component"/>
+            </div>
 
             <lkt-bottom-bar v-if="computedCanRenderBottomBar" :loading="loading"/>
 
