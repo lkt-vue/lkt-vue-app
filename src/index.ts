@@ -31,10 +31,8 @@ import LktDot from "lkt-dot";
 import LktBanner from "lkt-banner-box";
 import LktTabs from "lkt-tabs";
 import LktCalendar from "lkt-calendar";
-import {AppSize, LktObject} from "lkt-vue-kernel";
-import {StateControl} from "./state/StateControl";
+import {AppStateController, LktAppConfig} from "lkt-vue-kernel";
 import LktAppComponent from "./components/LktAppComponent.vue";
-import {LktAppConfig} from "./config/LktAppConfig";
 import LktSession from "lkt-session";
 
 
@@ -80,22 +78,22 @@ const LktVueApp: Plugin = {
     install: (app: App, cfg: LktAppConfig) => {
 
         // Setup config
-        if (cfg.mainMenu) StateControl.lktMainMenu = cfg.mainMenu;
-        if (cfg.bottomBar) StateControl.lktBottomBar = cfg.bottomBar;
-        if (cfg.hasMainHeader) StateControl.hasMainHeader = cfg.hasMainHeader;
-        if (cfg.hasMainMenu) StateControl.hasMainMenu = cfg.hasMainMenu;
-        if (cfg.hasBottomBar) StateControl.hasBottomBar = cfg.hasBottomBar;
-        if (cfg.replaceMainMenuButtonWithBack) StateControl.replaceMainMenuButtonWithBack = cfg.replaceMainMenuButtonWithBack;
-        if (cfg.mainHeader) StateControl.mainHeader.value = cfg.mainHeader;
+        if (cfg.mainMenu) AppStateController.lktMainMenu = cfg.mainMenu;
+        if (cfg.bottomBar) AppStateController.lktBottomBar = cfg.bottomBar;
+        if (cfg.hasMainHeader) AppStateController.hasMainHeader = cfg.hasMainHeader;
+        if (cfg.hasMainMenu) AppStateController.hasMainMenu = cfg.hasMainMenu;
+        if (cfg.hasBottomBar) AppStateController.hasBottomBar = cfg.hasBottomBar;
+        if (cfg.replaceMainMenuButtonWithBack) AppStateController.replaceMainMenuButtonWithBack = cfg.replaceMainMenuButtonWithBack;
+        if (cfg.mainHeader) AppStateController.mainHeader.value = cfg.mainHeader;
 
-        if (cfg.setup) StateControl.setup = cfg.setup;
+        if (cfg.setup) AppStateController.setup = cfg.setup;
 
         // App-level provide global vars
-        app.provide('lktAppSize', StateControl.lktAppSize);
-        app.provide('lktAdminEnabled', StateControl.lktAdminEnabled);
-        app.provide('lktAppLoading', StateControl.lktAppLoading);
-        app.provide('lktAppReady', StateControl.lktAppReady);
-        app.provide('lktAppSetup', StateControl.lktAppSetup);
+        app.provide('lktAppSize', AppStateController.lktAppSize);
+        app.provide('lktAdminEnabled', AppStateController.lktAdminEnabled);
+        app.provide('lktAppLoading', AppStateController.lktAppLoading);
+        app.provide('lktAppReady', AppStateController.lktAppReady);
+        app.provide('lktAppSetup', AppStateController.lktAppSetup);
 
         // Load all vuex storages
         app.use(getVuexStore());
@@ -139,28 +137,8 @@ const LktVueApp: Plugin = {
 
 export default LktVueApp;
 
-export const setLktAppSize = (size: AppSize) => {
-    StateControl.lktAppSize.value = size;
-}
-
-export const getLktAppSize = (): Ref<AppSize> => {
-    return StateControl.lktAppSize;
-}
-
-export const setLktAdminEnabled = (state: boolean) => {
-    StateControl.lktAdminEnabled.value = state;
-}
-
-export const getLktAdminEnabled = (): Ref<boolean> => {
-    return StateControl.lktAdminEnabled;
-}
-
-export const getLktAppSetup = (): Ref<LktObject> => {
-    return StateControl.lktAppSetup;
-}
-
 export {
     LktAppComponent,
 };
 
-export {updateMainHeader} from "./functions/state-control-functions";
+export {updateMainHeader, setLktAppSize, getLktAppSize, setLktAdminEnabled, getLktAdminEnabled, getLktAppSetup} from "lkt-vue-kernel";

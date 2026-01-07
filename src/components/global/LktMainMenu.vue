@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import {StateControl} from "../../state/StateControl";
-import {MenuController} from "lkt-vue-kernel";
+import {AppStateController, MenuController} from "lkt-vue-kernel";
 
 const props = withDefaults(defineProps<{
     loading?: boolean,
@@ -15,7 +14,7 @@ const closeMenu = () => MenuController.closeMenu('_');
     <div >
         <lkt-menu
             v-if="!loading"
-            v-bind="StateControl.lktMainMenu"
+            v-bind="AppStateController.lktMainMenu"
             menu-key="lkt-main-menu"
             @click-outside="closeMenu"
         />

@@ -1,6 +1,5 @@
-import {StateControl} from "../state/StateControl";
 import {Ref} from "vue";
-import {HeaderConfig} from "lkt-vue-kernel";
+import {AppStateController as StateControl, HeaderConfig} from "lkt-vue-kernel";
 import {DataState} from "lkt-data-state";
 
 export const setLktAppReady = (state: boolean) => {

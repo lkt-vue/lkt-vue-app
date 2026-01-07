@@ -24,4 +24,7 @@ export declare class StateControl {
     }) => boolean);
     static setup?: AppSetupConfig;
     static mainHeader: Ref<HeaderConfig | undefined>;
+    static lktAppThemeModeConfig: Ref<string>;
+    static lktAppThemeModeDetected: Ref<string>;
+    static lktAppThemeMode: Ref<string>;
 }

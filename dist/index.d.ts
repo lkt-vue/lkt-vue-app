@@ -1,5 +1,4 @@
-import { Plugin, Ref } from 'vue';
-import { AppSize, LktObject } from "lkt-vue-kernel";
+import { Plugin } from 'vue';
 import LktAppComponent from "./components/LktAppComponent.vue";
 import 'modern-normalize/modern-normalize.css';
 import 'lkt-flex-layout/layout/default.css';
@@ -34,10 +33,5 @@ import 'lkt-tooltip/styles';
 import 'lkt-vue-admin/styles';
 declare const LktVueApp: Plugin;
 export default LktVueApp;
-export declare const setLktAppSize: (size: AppSize) => void;
-export declare const getLktAppSize: () => Ref<AppSize>;
-export declare const setLktAdminEnabled: (state: boolean) => void;
-export declare const getLktAdminEnabled: () => Ref<boolean>;
-export declare const getLktAppSetup: () => Ref<LktObject>;
 export { LktAppComponent, };
-export { updateMainHeader } from "./functions/state-control-functions";
+export { updateMainHeader, setLktAppSize, getLktAppSize, setLktAdminEnabled, getLktAdminEnabled, getLktAppSetup } from "lkt-vue-kernel";

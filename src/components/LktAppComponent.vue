@@ -6,14 +6,13 @@ import {useRoute} from "vue-router";
 import LktBottomBar from "./global/LktBottomBar.vue";
 import LktMainHeader from "./global/LktMainHeader.vue";
 import LktMainMenu from "./global/LktMainMenu.vue";
-import {StateControl} from "./../state/StateControl";
 import {
     getLktAppLoading,
     getLktAppReady,
     setLktAppLoading,
-    setLktAppReady
-} from "./../functions/state-control-functions";
-import {MenuController} from "lkt-vue-kernel";
+    setLktAppReady,
+    setLktAppThemeModeConfig,
+    AppStateController, MenuController, ThemeModeConfig} from "lkt-vue-kernel";
 import {httpCall} from "lkt-http-client";
 import {setI18n} from "lkt-i18n";
 
@@ -27,15 +26,20 @@ const currentLang = ref('en');
 const hasMainHeader = ref(false);
 
 const loadApp = async () => {
-    if (StateControl.setup?.i18nResource) {
-        const i18nResponse = await httpCall(StateControl.setup.i18nResource);
+    if (AppStateController.setup?.i18nResource) {
+        const i18nResponse = await httpCall(AppStateController.setup.i18nResource);
         setI18n(i18nResponse.data);
     }
 
-    if (StateControl.setup?.setupResource) {
-        const setupResponse = await httpCall(StateControl.setup.setupResource);
+    if (AppStateController.setup?.setupResource) {
+        const setupResponse = await httpCall(AppStateController.setup.setupResource);
         for (let k in setupResponse.data) {
-            StateControl.lktAppSetup.value[k] = setupResponse.data[k];
+            if (k === 'preferredThemeMode') {
+                setLktAppThemeModeConfig(setupResponse.data[k]);
+
+            } else {
+                AppStateController.lktAppSetup.value[k] = setupResponse.data[k];
+            }
         }
     }
 
@@ -65,14 +69,15 @@ watch(toastCanvas, (v) => {
 })
 
 onMounted(async () => {
+    setupThemeMode();
     await loadApp();
 });
 
 const computedCanRenderBottomBar = computed(() => {
-    return StateControl.lktBottomBar
-        && typeof StateControl.lktBottomBar?.modelValue !== 'undefined'
-        && StateControl.lktBottomBar?.modelValue?.length > 0
-        && (StateControl.hasBottomBar === true || (typeof StateControl.hasBottomBar === 'function' && StateControl.hasBottomBar({
+    return AppStateController.lktBottomBar
+        && typeof AppStateController.lktBottomBar?.modelValue !== 'undefined'
+        && AppStateController.lktBottomBar?.modelValue?.length > 0
+        && (AppStateController.hasBottomBar === true || (typeof AppStateController.hasBottomBar === 'function' && AppStateController.hasBottomBar({
             route,
         })))
         ;
@@ -80,10 +85,10 @@ const computedCanRenderBottomBar = computed(() => {
 
 
 const computedCanRenderMainMenu = computed(() => {
-    return StateControl.lktMainMenu
-        && typeof StateControl.lktMainMenu?.modelValue !== 'undefined'
-        && StateControl.lktMainMenu?.modelValue?.length > 0
-        && (StateControl.hasMainMenu === true || (typeof StateControl.hasMainMenu === 'function' && StateControl.hasMainMenu({
+    return AppStateController.lktMainMenu
+        && typeof AppStateController.lktMainMenu?.modelValue !== 'undefined'
+        && AppStateController.lktMainMenu?.modelValue?.length > 0
+        && (AppStateController.hasMainMenu === true || (typeof AppStateController.hasMainMenu === 'function' && AppStateController.hasMainMenu({
             route
         })))
         ;
@@ -93,6 +98,54 @@ watch(route, () => {
     computedCanRenderMainMenu.value;
     computedCanRenderBottomBar.value;
 }, {flush: 'pre', immediate: true, deep: true});
+
+const setupThemeMode = () => {
+
+    AppStateController.lktAppThemeModeDetected.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+    window.matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change',({ matches }) => {
+            if (matches) {
+                AppStateController.lktAppThemeModeDetected.value = 'dark';
+            } else {
+                AppStateController.lktAppThemeModeDetected.value = 'light';
+            }
+        })
+}
+
+watch(AppStateController.lktAppThemeModeDetected, (v) => {
+    if (AppStateController.lktAppThemeModeConfig.value === ThemeModeConfig.Auto) {
+        AppStateController.lktAppThemeMode.value = AppStateController.lktAppThemeModeDetected.value;
+
+    } else if (AppStateController.lktAppThemeModeConfig.value === ThemeModeConfig.Light) {
+        AppStateController.lktAppThemeMode.value = 'light'
+
+    } else if (AppStateController.lktAppThemeModeConfig.value === ThemeModeConfig.Dark) {
+        AppStateController.lktAppThemeMode.value = 'dark'
+    }
+})
+
+watch(AppStateController.lktAppThemeModeConfig, (v) => {
+    if (AppStateController.lktAppThemeModeConfig.value === ThemeModeConfig.Auto) {
+        AppStateController.lktAppThemeMode.value = AppStateController.lktAppThemeModeDetected.value;
+
+    } else if (AppStateController.lktAppThemeModeConfig.value === ThemeModeConfig.Light) {
+        AppStateController.lktAppThemeMode.value = 'light'
+
+    } else if (AppStateController.lktAppThemeModeConfig.value === ThemeModeConfig.Dark) {
+        AppStateController.lktAppThemeMode.value = 'dark'
+    }
+})
+
+watch(AppStateController.lktAppThemeMode, (value, oldValue) => {
+
+    let el = document.getElementsByTagName('body')[0];
+
+    el.classList.add(`${value}-mode`);
+    el.classList.remove(`${oldValue}-mode`);
+})
+
+
 </script>
 
 <template>

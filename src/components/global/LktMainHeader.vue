@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import {AnchorType, ButtonConfig, ButtonType, HeaderConfig} from "lkt-vue-kernel";
+import {AnchorType, AppStateController, ButtonConfig, ButtonType, HeaderConfig} from "lkt-vue-kernel";
 import {computed, ref, watch} from "vue";
-import {StateControl} from "../../state/StateControl";
 import {useRoute} from "vue-router";
 
 const props = withDefaults(defineProps<{
@@ -25,13 +24,13 @@ watch(() => props.hasMainHeader, (v) => hasMainHeaderRef.value = v);
 watch(hasMainHeaderRef, (v) => emit('update:hasMainHeader', v));
 
 const checkVisibility = () => {
-    return (StateControl.hasMainHeader === true || (typeof StateControl.hasMainHeader === 'function' && StateControl.hasMainHeader({
+    return (AppStateController.hasMainHeader === true || (typeof AppStateController.hasMainHeader === 'function' && AppStateController.hasMainHeader({
         route
     })));
 }
 
 const checkReplaceMainMenuButtonWithBack = () => {
-    return (StateControl.replaceMainMenuButtonWithBack === true || (typeof StateControl.replaceMainMenuButtonWithBack === 'function' && StateControl.replaceMainMenuButtonWithBack({
+    return (AppStateController.replaceMainMenuButtonWithBack === true || (typeof AppStateController.replaceMainMenuButtonWithBack === 'function' && AppStateController.replaceMainMenuButtonWithBack({
         route
     })));
 }
@@ -44,7 +43,7 @@ watch(route, () => {
 
 const computedMainHeaderConfig = computed(() => {
     return <HeaderConfig>{
-        ...StateControl.mainHeader.value,
+        ...AppStateController.mainHeader.value,
     }
 })
 </script>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {StateControl} from "./../../state/StateControl";
 import {useRoute} from "vue-router";
 import {ref, watch} from "vue";
+import {AppStateController} from "lkt-vue-kernel";
 
 const props = withDefaults(defineProps<{
     lang?: string,
@@ -15,11 +15,11 @@ const route = useRoute();
 const canRender = ref(false);
 
 const checkVisibility = (): boolean => {
-    return typeof StateControl.lktBottomBar?.modelValue !== 'undefined'
-        && StateControl.lktBottomBar.modelValue?.length > 0
+    return typeof AppStateController.lktBottomBar?.modelValue !== 'undefined'
+        && AppStateController.lktBottomBar.modelValue?.length > 0
         && (
-            StateControl.hasBottomBar === true
-            || (typeof StateControl.hasBottomBar === 'function' && StateControl.hasBottomBar({route}))
+            AppStateController.hasBottomBar === true
+            || (typeof AppStateController.hasBottomBar === 'function' && AppStateController.hasBottomBar({route}))
         );
 }
 
@@ -32,7 +32,7 @@ watch(route, () => {
     <div>
         <lkt-menu
             v-if="!loading"
-            v-bind="StateControl.lktBottomBar"
+            v-bind="AppStateController.lktBottomBar"
             menu-key="lkt-bottom-bar"
             class="bottom-bar"
         />
