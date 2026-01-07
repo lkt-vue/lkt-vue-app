@@ -1,4 +1,4 @@
-import {App, Plugin, Ref} from 'vue';
+import {App, Plugin} from 'vue';
 
 import LktTooltip from "lkt-tooltip";
 import LktField from "lkt-field";
