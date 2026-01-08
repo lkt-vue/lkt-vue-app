@@ -85,12 +85,13 @@ const computedCanRenderBottomBar = computed(() => {
 
 
 const computedCanRenderMainMenu = computed(() => {
-    return AppStateController.lktMainMenu
-        && typeof AppStateController.lktMainMenu?.modelValue !== 'undefined'
-        && AppStateController.lktMainMenu?.modelValue?.length > 0
-        && (AppStateController.hasMainMenu === true || (typeof AppStateController.hasMainMenu === 'function' && AppStateController.hasMainMenu({
-            route
-        })))
+
+    if (!AppStateController.lktMainMenu) return false;
+
+    if (!(typeof AppStateController.lktMainMenu.http === 'object' || Array.isArray(AppStateController.lktMainMenu.modelValue))) return false;
+
+    return AppStateController.hasMainMenu === true
+        || (typeof AppStateController.hasMainMenu === 'function' && AppStateController.hasMainMenu({route}))
         ;
 })
 
