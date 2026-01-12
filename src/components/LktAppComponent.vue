@@ -7,12 +7,16 @@ import LktBottomBar from "./global/LktBottomBar.vue";
 import LktMainHeader from "./global/LktMainHeader.vue";
 import LktMainMenu from "./global/LktMainMenu.vue";
 import {
+    AppResourceStatus,
+    AppStateController,
     getLktAppLoading,
     getLktAppReady,
+    MenuController,
     setLktAppLoading,
     setLktAppReady,
     setLktAppThemeModeConfig,
-    AppStateController, MenuController, ThemeModeConfig} from "lkt-vue-kernel";
+    ThemeModeConfig
+} from "lkt-vue-kernel";
 import {httpCall} from "lkt-http-client";
 import {setI18n} from "lkt-i18n";
 
@@ -24,25 +28,38 @@ const ready = getLktAppReady(),
 
 const currentLang = ref('en');
 const hasMainHeader = ref(false);
+const computedRefreshing = computed(() => {
+    return AppStateController.i18nStatus.value === AppResourceStatus.Loading
+        || AppStateController.setupStatus.value === AppResourceStatus.Loading
+})
 
-const loadApp = async () => {
-    if (AppStateController.setup?.i18nResource) {
-        const i18nResponse = await httpCall(AppStateController.setup.i18nResource);
-        setI18n(i18nResponse.data);
-    }
+const loadI18n = async () => {
+        if (AppStateController.setup?.i18nResource) {
+            AppStateController.i18nStatus.value = AppResourceStatus.Loading;
+            const i18nResponse = await httpCall(AppStateController.setup.i18nResource);
+            setI18n(i18nResponse.data);
+            AppStateController.i18nStatus.value = AppResourceStatus.Ready;
+        }
+    },
+    loadSetup = async () => {
+        if (AppStateController.setup?.setupResource) {
+            AppStateController.setupStatus.value = AppResourceStatus.Loading;
+            const setupResponse = await httpCall(AppStateController.setup.setupResource);
+            for (let k in setupResponse.data) {
+                if (k === 'preferredThemeMode') {
+                    setLktAppThemeModeConfig(setupResponse.data[k]);
 
-    if (AppStateController.setup?.setupResource) {
-        const setupResponse = await httpCall(AppStateController.setup.setupResource);
-        for (let k in setupResponse.data) {
-            if (k === 'preferredThemeMode') {
-                setLktAppThemeModeConfig(setupResponse.data[k]);
-
-            } else {
-                AppStateController.lktAppSetup.value[k] = setupResponse.data[k];
+                } else {
+                    AppStateController.lktAppSetup.value[k] = setupResponse.data[k];
+                }
             }
+            AppStateController.setupStatus.value = AppResourceStatus.Ready;
         }
     }
 
+const loadApp = async () => {
+    await loadI18n();
+    await loadSetup();
     nextTick(() => {
         setLktAppReady(true);
         setLktAppLoading(false);
@@ -105,7 +122,7 @@ const setupThemeMode = () => {
     AppStateController.lktAppThemeModeDetected.value = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
     window.matchMedia('(prefers-color-scheme: dark)')
-        .addEventListener('change',({ matches }) => {
+        .addEventListener('change', ({matches}) => {
             if (matches) {
                 AppStateController.lktAppThemeModeDetected.value = 'dark';
             } else {
@@ -146,13 +163,21 @@ watch(AppStateController.lktAppThemeMode, (value, oldValue) => {
     el.classList.remove(`${oldValue}-mode`);
 })
 
+watch(AppStateController.i18nStatus, (value) => {
+    if (value === AppResourceStatus.RequiredRefresh) loadI18n();
+})
+
+watch(AppStateController.setupStatus, (value) => {
+    if (value === AppResourceStatus.RequiredRefresh) loadSetup();
+})
+
 
 </script>
 
 <template>
     <div class="main-content" :class="computedContentClass">
         <router-view
-            v-if="ready && !loading"
+            v-if="ready && !loading && !computedRefreshing"
             v-slot="{ Component }"
         >
             <lkt-main-header
