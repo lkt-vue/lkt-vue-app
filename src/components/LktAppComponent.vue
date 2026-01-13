@@ -2,7 +2,7 @@
 import {setCanvas} from "lkt-modal";
 import {computed, nextTick, onMounted, ref, watch} from "vue";
 import {setToastCanvas} from "lkt-toast";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import LktBottomBar from "./global/LktBottomBar.vue";
 import LktMainHeader from "./global/LktMainHeader.vue";
 import LktMainMenu from "./global/LktMainMenu.vue";
@@ -10,7 +10,7 @@ import {
     AppResourceStatus,
     AppStateController,
     getLktAppLoading,
-    getLktAppReady,
+    getLktAppReady, getLktAppSetup,
     MenuController,
     setLktAppLoading,
     setLktAppReady,
@@ -24,7 +24,8 @@ const ready = getLktAppReady(),
     loading = getLktAppLoading(),
     modalCanvas = ref(null),
     toastCanvas = ref(null),
-    route = useRoute();
+    route = useRoute(),
+    router = useRouter();
 
 const currentLang = ref('en');
 const hasMainHeader = ref(false);
@@ -32,6 +33,7 @@ const computedRefreshing = computed(() => {
     return AppStateController.i18nStatus.value === AppResourceStatus.Loading
         || AppStateController.setupStatus.value === AppResourceStatus.Loading
 })
+const state = getLktAppSetup();
 
 const loadI18n = async () => {
         if (AppStateController.setup?.i18nResource) {
@@ -170,6 +172,16 @@ watch(AppStateController.i18nStatus, (value) => {
 watch(AppStateController.setupStatus, (value) => {
     if (value === AppResourceStatus.RequiredRefresh) loadSetup();
 })
+
+watch(state, (v) => {
+    if (typeof AppStateController.appSetupChangedCallback === 'function') {
+        AppStateController.appSetupChangedCallback({
+            setup: v,
+            route,
+            router,
+        })
+    }
+}, {deep: true})
 
 
 </script>

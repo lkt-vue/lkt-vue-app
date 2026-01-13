@@ -87,6 +87,7 @@ const LktVueApp: Plugin = {
         if (cfg.mainHeader) AppStateController.mainHeader.value = cfg.mainHeader;
 
         if (cfg.setup) AppStateController.setup = cfg.setup;
+        if (cfg.appSetupChangedCallback) AppStateController.appSetupChangedCallback = cfg.appSetupChangedCallback;
 
         // App-level provide global vars
         app.provide('lktAppSize', AppStateController.lktAppSize);
